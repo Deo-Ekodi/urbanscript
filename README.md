@@ -125,10 +125,11 @@ Once the application is up and running:
 We welcome contributions from the community! If you want to contribute:
 
 1. ``Fork`` the repository.
-2. Create a new branch (`git checkout -b branch-name`).
-3. Commit your changes (`git commit -m 'commit message'`).
-4. Push to the branch (`git push origin branch-name`).
-5. Open a Pull Request.
+2. ``Clone`` the repository (`git clone https://github.com/Deo-Ekodi/urbanscript.git`)
+3. Create a new branch (`git checkout -b branch-name`).
+4. ``Commit`` your changes (`git commit -m 'commit message'`).
+5. ``Push`` to the branch (`git push origin branch-name`).
+6. Open a ``Pull Request``.
 
 Please ensure your code adheres to our coding standards and is thoroughly tested.
 
