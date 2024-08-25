@@ -73,6 +73,9 @@ To get a local copy up and running, follow these simple steps:
 2. **Set Up the Backend**:
    ```bash
    cd backend
+
+   django-admin startproject urbanscript
+   cd urbanscript
    python -m venv venv
    source venv/bin/activate  # On Windows use `venv\Scripts\activate`
    pip install -r requirements.txt
@@ -85,7 +88,7 @@ To get a local copy up and running, follow these simple steps:
 
 4. **Run the Backend**:
    ```bash
-   backend commands here
+   pip install django
    ```
 
 ### **Run with Docker**
@@ -105,7 +108,7 @@ To get a local copy up and running, follow these simple steps:
 ## **Directory Structure**
 
 ```plaintext
- [@StewieC]
+[project structure]
 ```
 
 ---
