@@ -90,6 +90,8 @@ To get a local copy up and running, follow these simple steps:
    ```bash
    pip install django
    ```
+5. **Run with [https://replicate.com/docs/get-started/nextjs](Next.js)**
+
 
 ### **Run with Docker**
 
