@@ -29,7 +29,7 @@ export default function About() {
         <section>
           <h2 className="text-2xl font-semibold mb-2">Credits</h2>
           <p>
-            This project was made possible with the support of technologies like <a href="https://nextjs.org" className="text-blue-500">Next.js</a>, <a href="https://replicate.com" className="text-blue-500">Replicate</a>, and cutting-edge AI models.
+            This project was made possible with the support of various technologies and cutting-edge AI models.
           </p>
         </section>
       </div>

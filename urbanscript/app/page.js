@@ -72,7 +72,7 @@ export default function Home() {
           type="text"
           className="flex-grow"
           name="prompt"
-          placeholder="Enter a prompt to display an image"
+          placeholder="Enter a prompt to generate"
         />
         <button className="button" type="submit">
           Go!
