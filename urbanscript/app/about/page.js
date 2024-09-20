@@ -15,7 +15,7 @@ export default function About() {
         <section className="mb-6">
           <h2 className="text-2xl font-semibold mb-2">How It Works</h2>
           <p>
-            Simply type in a description of your ideal room, and our AI model will process it to generate unique design ideas. Powered by Next.js, Replicate, and advanced AI technologies, our app ensures a seamless and interactive experience.
+            Simply type in a description of your ideal room, and our AI model will process it to generate unique design ideas. Powered by and advanced AI technologies, our app ensures a seamless and interactive experience.
           </p>
         </section>
   

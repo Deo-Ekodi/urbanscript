@@ -64,10 +64,7 @@ export default function Home() {
   return (
     <div className="container max-w-2xl mx-auto p-5">
       <h1 className="py-6 text-center font-bold text-2xl">
-        Dream something with{" "}
-        <a href="https://replicate.com/stability-ai/sdxl?utm_source=project&utm_project=getting-started">
-          SDXL
-        </a>
+        Dream something with UrbanScript
       </h1>
 
       <form className="w-full flex" onSubmit={handleSubmit}>
