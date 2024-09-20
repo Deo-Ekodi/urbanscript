@@ -52,14 +52,35 @@ export default function Home() {
     setLoading(false);
   };
 
-  const handleDownload = () => {
+  // const handleDownload = () => {
+  //   const link = document.createElement('a');
+  //   link.href = prediction.output[prediction.output.length - 1];
+  //   link.download = 'generated-image.png'; // Set a default file name
+  //   document.body.appendChild(link);
+  //   link.click();
+  //   document.body.removeChild(link);
+  // };
+
+
+  const handleDownload = async () => {
+    const imageUrl = prediction.output[prediction.output.length - 1];
+    
+    // Fetch the image and convert it to a Blob
+    const response = await fetch(imageUrl);
+    const blob = await response.blob();
+  
+    // Create a link element and trigger the download
     const link = document.createElement('a');
-    link.href = prediction.output[prediction.output.length - 1];
-    link.download = 'generated-image.png'; // Set a default file name
+    link.href = URL.createObjectURL(blob);
+    link.download = 'urban-script.png'; // Set a default file name
     document.body.appendChild(link);
     link.click();
+    
+    // Clean up
     document.body.removeChild(link);
+    URL.revokeObjectURL(link.href); // Free up memory
   };
+  
 
   return (
     <div className="container max-w-2xl mx-auto p-5">
