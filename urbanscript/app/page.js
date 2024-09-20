@@ -1,16 +1,22 @@
 'use client';
- 
+
 import { useState } from "react";
 import Image from "next/image";
- 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faDownload } from '@fortawesome/free-solid-svg-icons';
+
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
- 
+
 export default function Home() {
   const [prediction, setPrediction] = useState(null);
   const [error, setError] = useState(null);
- 
+  const [loading, setLoading] = useState(false);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
+    setError(null);
+    
     const response = await fetch("/api/predictions", {
       method: "POST",
       headers: {
@@ -23,10 +29,11 @@ export default function Home() {
     let prediction = await response.json();
     if (response.status !== 201) {
       setError(prediction.detail);
+      setLoading(false);
       return;
     }
     setPrediction(prediction);
- 
+
     while (
       prediction.status !== "succeeded" &&
       prediction.status !== "failed"
@@ -36,51 +43,72 @@ export default function Home() {
       prediction = await response.json();
       if (response.status !== 200) {
         setError(prediction.detail);
+        setLoading(false);
         return;
       }
-      console.log({ prediction: prediction });
       setPrediction(prediction);
     }
+
+    setLoading(false);
   };
- 
+
+  const handleDownload = () => {
+    const link = document.createElement('a');
+    link.href = prediction.output[prediction.output.length - 1];
+    link.download = 'generated-image.png'; // Set a default file name
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
   return (
     <div className="container max-w-2xl mx-auto p-5">
       <h1 className="py-6 text-center font-bold text-2xl">
-        Dream something with{" "}
-        <a href="https://replicate.com/stability-ai/sdxl?utm_source=project&utm_project=getting-started">
-          SDXL
-        </a>
+        Dream something with UrbanScript
       </h1>
- 
+
       <form className="w-full flex" onSubmit={handleSubmit}>
         <input
           type="text"
           className="flex-grow"
           name="prompt"
-          placeholder="Enter a prompt to display an image"
+          placeholder="Enter a prompt to generate"
         />
         <button className="button" type="submit">
           Go!
         </button>
       </form>
- 
+
       {error && <div>{error}</div>}
- 
+      
+      {loading && (
+        <div className="loader-wrapper">
+          <div className="loader"></div>
+          <p>Processing...</p>
+        </div>
+      )}
+
+      {prediction && prediction.output && (
+        <div className="image-wrapper mt-5 relative">
+          <Image
+            src={prediction.output[prediction.output.length - 1]}
+            alt="output"
+            sizes="100vw"
+            height={768}
+            width={768}
+          />
+          <button
+            onClick={handleDownload}
+            className="absolute bottom-2 right-2 p-2 bg-blue-600 rounded-full text-white shadow hover:bg-blue-700 transition"
+            aria-label="Download image"
+          >
+            <FontAwesomeIcon icon={faDownload} size="lg" />
+          </button>
+        </div>
+      )}
+      
       {prediction && (
-        <>
-          {prediction.output && (
-            <div className="image-wrapper mt-5">
-              <Image
-                src={prediction.output[prediction.output.length - 1]}
-                alt="output"
-                sizes="100vw"
-                height={768}
-                width={768}
-              />
-            </div>
-          )}
-          <p className="py-3 text-sm opacity-50">status: {prediction.status}</p>
-        </>
+        <p className="py-3 text-sm opacity-50">status: {prediction.status}</p>
       )}
     </div>
   );
