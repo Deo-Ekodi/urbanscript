@@ -1,5 +1,7 @@
 // app/about/page.js
 
+export const fetchCache = 'force-no-store';
+
 export default function About() {
     return (
       <div className="container mx-auto p-5">
