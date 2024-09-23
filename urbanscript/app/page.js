@@ -54,15 +54,6 @@ export default function Home() {
     setLoading(false);
   };
 
-  // const handleDownload = () => {
-  //   const link = document.createElement('a');
-  //   link.href = prediction.output[prediction.output.length - 1];
-  //   link.download = 'generated-image.png'; // Set a default file name
-  //   document.body.appendChild(link);
-  //   link.click();
-  //   document.body.removeChild(link);
-  // };
-
 
   const handleDownload = async () => {
     const imageUrl = prediction.output[prediction.output.length - 1];
