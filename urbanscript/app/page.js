@@ -5,6 +5,8 @@ import Image from "next/image";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faDownload } from '@fortawesome/free-solid-svg-icons';
 
+export const fetchCache = 'force-no-store';
+
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
 export default function Home() {
