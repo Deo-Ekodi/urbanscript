@@ -3,7 +3,6 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
@@ -14,6 +13,7 @@
     "@fortawesome/react-fontawesome": "^0.2.2",
     "get-port": "^7.1.0",
     "next": "14.2.13",
+    "next-auth": "^4.24.7",
     "react": "^18",
     "react-dom": "^18",
     "replicate": "^0.33.0"
