@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %} | UrbanScript</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-left">
+            <button class="nav-button">Sign Up</button>
+            <button class="nav-button">Login</button>
+        </div>
+        <div class="nav-right">
+            <img src="images/logo.webp" alt="UrbanScript Logo" class="logo">
+            <span class="company-name">UrbanScript</span>
+        </div>
+    </nav>
+    <!-- this is the body of the page -->
+    <div>
+        {% block content %}
+            {% endblock %}
+        </div>
+</body>

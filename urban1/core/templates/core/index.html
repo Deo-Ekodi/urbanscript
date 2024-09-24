@@ -1,0 +1,38 @@
+{% exetend 'base.html' %}
+
+{% block title %}Home{% endblock %}
+
+
+{% block content %}
+<body>
+    
+
+    <div class="container">
+        <header>
+            <h1>Interior Design Suggestions</h1>
+            <p>Describe your room or upload an image to get personalized design suggestions.</p>
+        </header>
+
+        <main>
+            <form method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit">Get Suggestions</button>
+            </form>
+
+            {% if suggestions %}
+                <h2>Suggestions</h2>
+                <div class="suggestions">
+                    {% for suggestion in suggestions %}
+                        <div class="suggestion">
+                            <img src="{{ suggestion.image_url }}" alt="Suggestion Image">
+                            <p>{{ suggestion.description }}</p>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        </main>
+    </div>
+</body>
+{% endblock %}
+</html>
