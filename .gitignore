@@ -217,3 +217,5 @@ coverage.xml
 
 # Miscellaneous
 *.orig
+
+.next/
