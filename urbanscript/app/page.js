@@ -149,6 +149,9 @@ const Home = () => {
         const formData = new FormData(event.target); // Create a new FormData object directly from the form
         const prompt = formData.get("prompt"); // Get the prompt from FormData
         const imageFile = formData.get("file"); // Get the uploaded file
+//unnecesary
+        console.log("FormData:", Array.from(formData.entries())); // Log FormData entries
+
 
         if (!imageFile) {
             console.error("No file uploaded");
@@ -165,8 +168,18 @@ const Home = () => {
 
         if (!fileUploadResponse.ok) {
             console.error("Failed to upload image");
-            const errorMessage = await fileUploadResponse.json();
-            setError(errorMessage.detail || "Failed to upload image.");
+        
+            // Check if there is a response body
+            const responseText = await fileUploadResponse.text(); // Get response as text
+            console.log("Response from server:", responseText);
+        
+            try {
+                const errorMessage = JSON.parse(responseText); // Attempt to parse the response as JSON
+                setError(errorMessage.detail || "Failed to upload image.");
+            } catch (jsonError) {
+                setError("Failed to upload image. Server response was not valid JSON.");
+            }
+        
             setLoading(false);
             return;
         }

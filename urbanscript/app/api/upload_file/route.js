@@ -1,14 +1,13 @@
 import formidable from 'formidable';
-import fetch from 'node-fetch'; // Ensure you have node-fetch installed
+import fetch from 'node-fetch';
 import fs from 'fs/promises';
 
 export const config = {
   api: {
-    bodyParser: false,
+    bodyParser: false, // Disable Next.js body parser
   },
 };
 
-// Use a named export for POST
 export async function POST(req) {
   return new Promise((resolve, reject) => {
     const form = new formidable.IncomingForm();
@@ -46,9 +45,9 @@ export async function POST(req) {
         });
 
         if (!fileUploadResponse.ok) {
-          const errorDetails = await fileUploadResponse.text();
-          console.error("Failed to upload file to Replicate:", errorDetails);
-          throw new Error("Failed to upload file to Replicate");
+            const errorDetails = await fileUploadResponse.text(); // Get response as text
+            console.error("Failed to upload file to Replicate:", errorDetails);
+            throw new Error("Failed to upload file to Replicate");
         }
 
         const fileData = await fileUploadResponse.json();
