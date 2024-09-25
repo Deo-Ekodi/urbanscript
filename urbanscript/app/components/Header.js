@@ -40,7 +40,7 @@ export default function Header() {
   // Close menu if clicking outside of the menu area
   useEffect(() => {
     const closeMenuOnOutsideClick = (e) => {
-      if (isMenuOpen && !e.target.closest('.mobile-menu')) {
+      if (isMenuOpen && !e.target.closest('.mobile-menu-card')) {
         setIsMenuOpen(false);
       }
     };
@@ -92,22 +92,21 @@ export default function Header() {
 
         {/* Mobile Menu */}
         {isMenuOpen && (
-          <div className="fixed inset-0 bg-gray-800 text-white flex flex-col items-center justify-center space-y-6 py-10 z-50 mobile-menu">
-            {/* Cool background with padding */}
-            <div className="absolute inset-0 bg-blue-700 opacity-95"></div>
-
-            <Link href="/" onClick={toggleMenu} className="relative text-xl p-4 bg-gray-700 hover:bg-gray-600 transition rounded-lg w-48 text-center">
-              Home
-            </Link>
-            <Link href="/about" onClick={toggleMenu} className="relative text-xl p-4 bg-gray-700 hover:bg-gray-600 transition rounded-lg w-48 text-center">
-              About
-            </Link>
-            <Link href="/tool" onClick={toggleMenu} className="relative text-xl p-4 bg-gray-700 hover:bg-gray-600 transition rounded-lg w-48 text-center">
-              Tool
-            </Link>
-            <Link href="/coming_soon" onClick={toggleMenu} className="relative text-xl p-4 bg-gray-700 hover:bg-gray-600 transition rounded-lg w-48 text-center">
-              Pricing
-            </Link>
+          <div className="fixed top-16 right-5 w-72 bg-gray-800 text-white rounded-lg shadow-lg p-6 z-50 mobile-menu-card">
+            <div className="flex flex-col space-y-4">
+              <Link href="/" onClick={toggleMenu} className="text-xl p-4 bg-gray-700 hover:bg-gray-600 transition rounded-md text-center">
+                Home
+              </Link>
+              <Link href="/about" onClick={toggleMenu} className="text-xl p-4 bg-gray-700 hover:bg-gray-600 transition rounded-md text-center">
+                About
+              </Link>
+              <Link href="/tool" onClick={toggleMenu} className="text-xl p-4 bg-gray-700 hover:bg-gray-600 transition rounded-md text-center">
+                Tool
+              </Link>
+              <Link href="/coming_soon" onClick={toggleMenu} className="text-xl p-4 bg-gray-700 hover:bg-gray-600 transition rounded-md text-center">
+                Pricing
+              </Link>
+            </div>
           </div>
         )}
       </nav>
