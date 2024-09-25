@@ -133,6 +133,7 @@
 
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
+export const fetchCache = 'force-no-store';
 
 const images = [
   { src: '/images/1.jpg', caption: 'modern office' },
