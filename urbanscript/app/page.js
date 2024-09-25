@@ -136,7 +136,7 @@ import Image from 'next/image';
 export const fetchCache = 'force-no-store';
 
 const images = [
-  { src: '/images/1.jpg', caption: 'modern office' },
+  { src: '/images/7.jpg', caption: 'modern office' },
   { src: '/images/2.jpg', caption: 'modern office' },
   { src: '/images/3.jpg', caption: 'modern office' },
   { src: '/images/4.jpg', caption: 'modern office' },
