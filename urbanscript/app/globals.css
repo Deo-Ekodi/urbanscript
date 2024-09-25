@@ -391,3 +391,38 @@ button:hover {
   max-width: 600px;
   margin-bottom: 20px;
 }
+
+/* menu */
+/* Add some custom styles for the mobile menu */
+.fixed-menu {
+  border-radius: 10px 0 0 10px;
+  width: 240px; /* Adjusted menu width */
+  box-shadow: -2px 0 15px rgba(0, 0, 0, 0.3); /* Add shadow for depth */
+  background: linear-gradient(145deg, #222, #333); /* Gradient background for cool effect */
+}
+
+/* Smooth transition for sliding the menu */
+.menu-transition {
+  transition: transform 0.3s ease-in-out;
+}
+
+/* Close button hover effect */
+.close-button {
+  transition: color 0.2s;
+}
+
+.close-button:hover {
+  color: #ff5a5f;
+}
+
+/* Menu link hover effects */
+.menu-item {
+  font-size: 1.2rem;
+  padding: 1rem 0;
+  text-align: center;
+  transition: color 0.3s;
+}
+
+.menu-item:hover {
+  color: #1e90ff;
+}
