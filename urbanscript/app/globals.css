@@ -202,6 +202,7 @@ button {
   padding: 0.8rem 1.5rem;
   background-color: #4A90E2; /* Adjust as needed */
   border: none;
+  /* border: 2px solid #ffffff; */
   border-radius: 0.5rem;
   color: #fff;
   font-size: 1.2rem;
