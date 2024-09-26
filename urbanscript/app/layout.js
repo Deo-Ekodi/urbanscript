@@ -2,8 +2,9 @@
 import localFont from "next/font/local";
 import Link from "next/link";
 import "./globals.css";
-import Header from "./components/Header";  // Import the Header
-import Footer from "./components/Footer";  // Import the Footer
+import Header from "../components/Header";  // Import the Header
+import Footer from "../components/Footer";  // Import the Footer
+import { AuthProvider } from "./providers";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -31,7 +32,9 @@ export default function RootLayout({ children }) {
         className={`${geistSans.variable} ${geistMono.variable} antialiased flex flex-col min-h-screen`}
       >
         <Header /> {/* Header added here */}
-        <main className="flex-grow">{children}</main> {/* Ensures content grows */}
+        <AuthProvider>
+          <main className="flex-grow">{children}</main> {/* Ensures content grows */}
+        </AuthProvider>
         <Footer /> {/* Footer added here */}
       </body>
     </html>

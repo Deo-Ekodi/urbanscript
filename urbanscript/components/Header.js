@@ -79,19 +79,19 @@ export default function Header() {
           <Link href="/" className="text-white hover:text-blue-400 transition">
             Home
           </Link>
-          <Link href="/about" className="text-white hover:text-blue-400 transition">
-            About
+          <Link href="/dashboard" className="text-white hover:text-blue-400 transition">
+            dashboard
           </Link>
-          <Link href="/tool" className="text-white hover:text-blue-400 transition">
-            Tool
-          </Link>
-          <Link href="/coming_soon" className="text-white hover:text-blue-400 transition">
-            Pricing
+          {/* <Link href="Register" className="text-white hover:text-blue-400 transition">
+            register
+          </Link> */}
+          <Link href="/login" className="text-white hover:text-blue-400 transition">
+            login
           </Link>
         </div>
 
         {/* Mobile Menu */}
-        {isMenuOpen && (
+        {/* {isMenuOpen && (
           <div className="fixed top-16 right-5 w-72 bg-gray-800 text-white rounded-lg shadow-lg p-6 z-50 mobile-menu-card">
             <div className="flex flex-col space-y-4">
               <Link href="/" onClick={toggleMenu} className="text-xl p-4 bg-gray-700 hover:bg-gray-600 transition rounded-md text-center">
@@ -108,7 +108,7 @@ export default function Header() {
               </Link>
             </div>
           </div>
-        )}
+        )} */}
       </nav>
     </header>
   );
