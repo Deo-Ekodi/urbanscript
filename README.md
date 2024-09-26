@@ -91,6 +91,14 @@ To get a local copy up and running, follow these simple steps:
    pip install django
    ```
 5. **Run with [next.js](https://replicate.com/docs/get-started/nextjs)**
+   run and depploy with vercel
+   ```bash
+   vercel build && vercel deploy --prebuilt
+   ```
+   To deploy to development, use
+   ```bash
+   vercel --prod
+   ```
 
 
 ### **Run with Docker**
