@@ -2,8 +2,8 @@
 import localFont from "next/font/local";
 import Link from "next/link";
 import "./globals.css";
-import Header from "@/components/Header";  // Import the Header
-import Footer from "@/components/Footer";  // Import the Footer
+import Header from "../components/Header";  // Import the Header
+import Footer from "../components/Footer";  // Import the Footer
 import { AuthProvider } from "./providers";
 
 const geistSans = localFont({
