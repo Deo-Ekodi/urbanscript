@@ -23,7 +23,7 @@ const Layout = ({ children }) => {
             <head>
                 <meta charSet="UTF-8" />
                 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-                <title>MLD | Molad e Konsult - Bespoke Web and Mobile Applications</title>
+                <title>UrbanScript | Molad e Konsult - Bespoke Web and Mobile Applications</title>
                 <meta name="description" content="Bespoke Web and Mobile Applications" />
             </head>
             <body>
