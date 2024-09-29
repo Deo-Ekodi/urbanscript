@@ -9,9 +9,9 @@ const NavLinks = () => {
             <Link href="/#about" className="px-4 font-extrabold text-gray-500 hover:text-blue-900">
                 About
             </Link>
-            <Link href="/#services" className="px-4 font-extrabold text-gray-500 hover:text-blue-900">
+            {/* <Link href="/#services" className="px-4 font-extrabold text-gray-500 hover:text-blue-900">
                 Services
-            </Link>
+            </Link> */}
             <Link href="/contact" className="px-4 font-extrabold text-gray-500 hover:text-blue-900">
                 Contact Us
             </Link>

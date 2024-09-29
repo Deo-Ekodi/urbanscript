@@ -93,8 +93,8 @@ const Home = () => {
         <>
             <Hero />
             <Intro />
-            <Services/>
-            <Potforlio/>
+            {/* <Services/> */}
+            {/* <Potforlio/> */}
             <Cta />
             <Footer />
         </>

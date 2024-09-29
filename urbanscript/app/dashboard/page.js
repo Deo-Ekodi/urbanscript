@@ -1,15 +1,11 @@
-import UserInfo from "@/components/UserInfo";
+import DashboardHeader from "@/components/dashboard/DashboardHeader";
+import Dashboard from "@/components/dashboard/DashboardPage";
 import NavBar from "@/components/Navbar/NavBar";
-import Footer from "@/components/Footer";
-import Tool from "@/components/tool/ToolPage";
 
-export default function Dashboard() {
+export default function dashboard () {
   return (
     <>
-      <NavBar />;
-      <UserInfo />;
-      <Tool />;
-      <Footer />;
+      <Dashboard />
     </>
   );
-};
+}
