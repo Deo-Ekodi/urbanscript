@@ -1,6 +1,8 @@
 'use client';
 
-import { useState } from "react";
+import { useState, useEffect, useContext } from "react";
+import { useRouter } from 'next/navigation';
+import { AuthContext } from '@/app/providers/providers';
 import NavBar from "@/components/Navbar/NavBar";
 import Footer from "@/components/Footer";
 import UserInfo from "@/components/UserInfo";
@@ -8,8 +10,16 @@ import Tool from "@/components/tool/ToolPage";
 import DashboardHeader from "@/components/dashboard/DashboardHeader";
 
 export default function Dashboard() {
+  const { user } = useContext(AuthContext); // Get the user from the context
+  const router = useRouter(); // Use router for redirection
+
+  useEffect(() => {
+    if (!user) {
+        router.push('/login'); // Redirect to the login page if not authenticated
+    }
+}, [user, router]);
   // State to manage which component is shown in the main content area
-  const [activeComponent, setActiveComponent] = useState("UserInfo");
+  const [activeComponent, setActiveComponent] = useState("Tool");
 
   return (
     <>
