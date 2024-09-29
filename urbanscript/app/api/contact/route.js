@@ -33,7 +33,7 @@
 //   }
 // }
 
-import { connectMongoDB } from "../../../lib/mongodb";
+import { connectMongoDB } from "@/library/mongodb/mongodb";
 import Contact from "@/models/Contact/Contact";
 import { NextResponse } from "next/server";
 import mongoose from "mongoose";

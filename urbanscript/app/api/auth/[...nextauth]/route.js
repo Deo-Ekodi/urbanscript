@@ -1,4 +1,4 @@
-import { connectMongoDB } from "../../../lib/mongodb";
+import { connectMongoDB } from "@/library/mongodb/mongodb";
 import User from "@/models/User/User";
 import NextAuth from "next-auth/next";
 import CredentialsProvider from "next-auth/providers/credentials";
