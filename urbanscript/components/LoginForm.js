@@ -100,7 +100,7 @@ export default function LoginForm() {
         return;
       }
 
-      router.replace("pages/Tool");
+      router.replace("/dashboard");
     } catch (error) {
       setError("Something went wrong");
       setLoading(false);
@@ -115,24 +115,7 @@ export default function LoginForm() {
         background: "linear-gradient(to bottom right, #1f1c2c, #928dab)",
       }}
     >
-      {/* Left Section with Graphics Animation */}
-      {/* <div
-        style={{
-          flex: 1,
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          animation: "fadeIn 1s ease-in-out",
-        }}
-      >
-        <img
-          src="/animations/tech-animation.svg"
-          alt="Tech Animation"
-          style={{ width: "80%", height: "auto", animation: "float 3s infinite ease-in-out" }}
-        />
-      </div> */}
 
-      {/* Right Section with Login Form */}
       <div
         style={{
           flex: 1,

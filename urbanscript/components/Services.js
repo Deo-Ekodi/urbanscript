@@ -25,10 +25,10 @@ const Services = () => {
             {/* Service Card 1 */}
             <div className="bg-white transition-all ease-in-out duration-400 overflow-hidden text-gray-700 hover:bg-gray-500 hover:text-white rounded-lg shadow-2xl p-3 group">
               <div className="m-2 text-justify text-sm">
-                <Image alt="Web Development" className="rounded-t group-hover:scale-[1.15] transition duration-1000 ease-in-out" src={img} />
-                <h2 className="font-semibold my-4 text-2xl text-center">Web Development</h2>
+                <Image alt="General" className="rounded-t group-hover:scale-[1.15] transition duration-1000 ease-in-out" src={img} />
+                <h2 className="font-semibold my-4 text-2xl text-center">General</h2>
                 <p className="text-md font-medium">
-                  We specialize in creating and optimizing high-quality, custom websites for businesses and organizations of all sizes. Building mobile-friendly and easy-to-use websites and applications for clients.
+                  We specialize in creating and optimizing high-quality, interior designs for both residential and commercial setups of our clients. Accurate delivery of specific tailored imaes to bring your design ideas to visuals.
                 </p>
               </div>
             </div>
@@ -36,10 +36,10 @@ const Services = () => {
             {/* Service Card 2 */}
             <div className="bg-white transition-all ease-in-out duration-400 overflow-hidden text-gray-700 hover:bg-gray-500 hover:text-white rounded-lg shadow-2xl p-3 group">
               <div className="m-2 text-justify text-sm">
-                <Image alt="Mobile App Development" className="rounded-t group-hover:scale-[1.15] transition duration-1000 ease-in-out" src={img2} />
-                <h2 className="font-semibold my-4 text-2xl text-center">Mobile App Development</h2>
+                <Image alt="Customize yours" className="rounded-t group-hover:scale-[1.15] transition duration-1000 ease-in-out" src={img2} />
+                <h2 className="font-semibold my-4 text-2xl text-center">Custom Models</h2>
                 <p className="text-md font-medium">
-                  We develop high-quality, custom cross-platform mobile applications that are robust and optimized for performance, scalability, and accessibility.
+                  In need of a custom, personalized model to suit your organizations' interior design ideas? Contact Us, our team will deliver on that.
                 </p>
               </div>
             </div>
@@ -47,8 +47,8 @@ const Services = () => {
             {/* Service Card 3 */}
             <div className="bg-white transition-all ease-in-out duration-400 overflow-hidden text-gray-700 hover:bg-gray-500 hover:text-white rounded-lg shadow-2xl p-3 group">
               <div className="m-2 text-justify text-sm">
-                <Image alt="Domain and Hosting Services" className="rounded-t group-hover:scale-[1.15] transition duration-1000 ease-in-out" src={img3} />
-                <h2 className="font-semibold my-4 text-2xl text-center">Domain and Hosting Services</h2>
+                <Image alt="Just About there" className="rounded-t group-hover:scale-[1.15] transition duration-1000 ease-in-out" src={img3} />
+                <h2 className="font-semibold my-4 text-2xl text-center">Coming Soon</h2>
                 <p className="text-md font-medium">
                   We provide domain registration and web hosting services to individuals and organizations to enable them to gain visibility in the digital space.
                 </p>
@@ -58,8 +58,8 @@ const Services = () => {
             {/* Service Card 4 */}
             <div className="bg-white transition-all ease-in-out duration-400 overflow-hidden text-gray-700 hover:bg-gray-500 hover:text-white rounded-lg shadow-2xl p-3 group">
               <div className="m-2 text-justify text-sm">
-                <Image alt="General IT Consultations" className="rounded-t group-hover:scale-[1.15] transition duration-1000 ease-in-out" src={img4} />
-                <h2 className="font-semibold my-4 text-2xl text-center">General IT Consultations</h2>
+                <Image alt="Just about there" className="rounded-t group-hover:scale-[1.15] transition duration-1000 ease-in-out" src={img4} />
+                <h2 className="font-semibold my-4 text-2xl text-center">Coming Soon</h2>
                 <p className="text-md font-medium">
                   Our IT consultation service provides expert guidance and support for businesses and individuals looking to optimize their technology solutions.
                 </p>
@@ -81,11 +81,11 @@ const Services = () => {
                 </svg>
               </div>
               <h3 className="text-3xl text-blue-900 font-bold">
-                We <span className="font-black">Build</span>
+                You <span className="font-black">Request</span>
               </h3>
               <div>
                 <p className="my-3 text-xl text-gray-600 font-semibold">
-                  With over 10 years experience in software analysis and design and a deep understanding of the latest IT trends and solutions, we provide customized recommendations and strategies to help you improve your operations, reduce costs, and increase efficiency.
+                  Is it your office room? Your living room? All is sorted here at UrbanScript. You want to experience the latest image generation models in action? Login and let us build for you.
                 </p>
               </div>
             </div>
@@ -98,11 +98,11 @@ const Services = () => {
                 </svg>
               </div>
               <h3 className="text-3xl text-blue-900 font-bold">
-                We <span className="font-black">Deploy</span>
+                We <span className="font-black">Deliver</span>
               </h3>
               <div>
                 <p className="my-3 text-xl text-gray-600 font-semibold">
-                  We provide complete system implementation and deployment services, ensuring that your new solutions are seamlessly integrated into your existing environment and that your team is trained to effectively use them.
+                With the rising trend of AI, we keep you up-to-date with custom prototype models of your choice. We provide accurate visuals that help you improve your interior design operations. Save on time and increase productivity.
                 </p>
               </div>
             </div>
