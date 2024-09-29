@@ -188,7 +188,7 @@ import { useRouter } from 'next/navigation';
 import Image from "next/image";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faDownload } from '@fortawesome/free-solid-svg-icons';
-import { AuthContext } from '../../providers/providers'; // Adjust the import path if necessary
+import { AuthContext } from '@/app/providers/providers'; // Adjust the import path if necessary
 
 export const fetchCache = 'force-no-store';
 

@@ -14,16 +14,16 @@ const Intro = () => {
                 </div>
                 <div className="flex-col my-4 text-center lg:text-left lg:my-0 lg:justify-end w-full lg:w-1/2 px-8" data-aos="zoom-in" data-aos-delay="500">
                     <h3 className="text-3xl text-blue-900 font-bold">
-                        We develop high quality bespoke web and mobile applications for organizations, institutions and SMEs
+                        We aim to make true your design fantasy
                     </h3>
                     <div>
                         <p className="my-3 text-xl text-gray-600 font-semibold">
-                            Our team is well vast in software development and is ready to help develop the applications of your choice.
+                        At UrbanScript, we believe in transforming the way interior designers create and visualize spaces. Our AI-powered image generation tool is designed to simplify the creative process, enabling designers to explore diverse styles, layouts, and aesthetics effortlessly
                         </p>
                     </div>
                     <div>
                         <p className="my-3 text-xl text-gray-600 font-semibold">
-                            We take responsibility for building custom software solutions that caters for automation of your business processes and improve efficiency.
+                        We strive to bridge the gap between imagination and reality, making it easier for designers to present compelling ideas to their clients. Our tool saves time, sparks creativity, and helps designers make informed decisions with stunning visuals.
                         </p>
                     </div>
                     <Link href="/contact" className="text-white bg-blue-900 hover:bg-blue-800 inline-flex items-center justify-center w-full px-6 py-2 my-4 text-lg shadow-xl rounded-2xl sm:w-auto sm:mb-0 group">

@@ -15,10 +15,10 @@ const Footer = () => {
                             <div className="box-border border-b-4 border-blue-900 p-8 bg-gray-200 text-gray-600 text-center rounded-lg xl:w-80 mx-auto">
                                 <h3 className="font-bold text-4xl mb-4">UrbanScript</h3>
                                 <div className='text-md font-medium text-gray-600'>
-                                    <h5>Molad e Konsult</h5>
-                                    <p>Ilo Awela,</p>
-                                    <p>Ota,</p>
-                                    <p>Ogun State.</p>
+                                    <h5>Your Unique,</h5>
+                                    <p>Dedicated,</p>
+                                    <p>Design</p>
+                                    <p>Assisstant.</p>
                                 </div>
                             </div>
                         </div>
@@ -28,13 +28,13 @@ const Footer = () => {
                             <h6 className="text-[#013289] text-xl font-bold mb-4">LINKS</h6>
                             <ul className="text-md">
                                 <li className="mb-2">
-                                    <Link href="#about" className="text-[#013289] hover:text-gray-900 hover:tracking-wider transition duration-250 ease-in-out">About</Link>
+                                    <Link href="/about" className="text-[#013289] hover:text-gray-900 hover:tracking-wider transition duration-250 ease-in-out">About</Link>
                                 </li>
                                 <li className="mb-2">
                                     <Link href="#services" className="text-[#013289] hover:text-gray-900 hover:tracking-wider transition duration-250 ease-in-out">Services</Link>
                                 </li>
                                 <li className="mb-2">
-                                    <Link href="#contact" className="text-[#013289] hover:text-gray-900 hover:tracking-wider transition duration-250 ease-in-out">Contact</Link>
+                                    <Link href="/contact" className="text-[#013289] hover:text-gray-900 hover:tracking-wider transition duration-250 ease-in-out">Contact</Link>
                                 </li>
                             </ul>
                         </div>
@@ -92,7 +92,7 @@ const Footer = () => {
                         <div className="w-full md:w-4/12 px-4 mx-auto text-center py-2">
                             <div className="text-sm text-gray-200 font-semibold py-1">
                                 Copyright &copy; {new Date().getFullYear()}{"  "}
-                                <Link href="#" className="hover:text-gray-900">UrbanScript LLC</Link>. All rights reserved.
+                                <Link href="#" className="hover:text-gray-900">UrbanScript, LLC</Link>. All rights reserved.
                             </div>
                         </div>
                     </div>

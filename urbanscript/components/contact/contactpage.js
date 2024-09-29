@@ -166,7 +166,7 @@ const Contact = () => {
                                         name="phone_number" 
                                         className="w-full bg-gray-100 text-gray-900 mt-2 p-3 rounded-lg focus:outline-none focus:shadow-outline"
                                         type="number" 
-                                        placeholder="Phone*"
+                                        placeholder="Phone"
                                         value={phone}
                                         onChange={(e) => setPhone(e.target.value)}
                                         onKeyUp={clearErrors}
