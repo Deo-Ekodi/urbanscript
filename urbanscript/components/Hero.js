@@ -19,7 +19,7 @@ const Hero = () => {
                             Let UrbanScript be your creative partner in crafting exceptional room interiors that captivate and inspire..
                         </div>
                         <div className="mb-4 space-x-0 md:space-x-2 md:mb-8">
-                            <Link href="/contact" passHref legacyBehavior>
+                            <Link href="/dashboard" passHref legacyBehavior>
                                 <div className="text-white bg-blue-900 hover:bg-blue-800 inline-flex items-center justify-center w-full px-6 py-3 my-4 text-lg shadow-xl rounded-2xl sm:w-auto sm:mb-0 cursor-pointer">
                                     Learn more
                                     <svg className="w-4 h-4 ml-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
