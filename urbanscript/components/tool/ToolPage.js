@@ -1,186 +1,3 @@
-// 'use client';
-
-// import { useState } from "react";
-// import Image from "next/image";
-// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-// import { faDownload } from '@fortawesome/free-solid-svg-icons';
-// // import "../globals.css";
-
-// export const fetchCache = 'force-no-store';
-
-// const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
-
-// export default function Tool() {
-//     const [prediction, setPrediction] = useState(null);
-//     const [error, setError] = useState(null);
-//     const [loading, setLoading] = useState(false);
-
-//     const handleSubmit = async (e) => {
-//         e.preventDefault();
-//         setLoading(true);
-//         setError(null);
-
-//         const response = await fetch("/api/predictions", {
-//             method: "POST",
-//             headers: {
-//                 "Content-Type": "application/json",
-//             },
-//             body: JSON.stringify({
-//                 prompt: e.target.prompt.value,
-//             }),
-//         });
-//         let prediction = await response.json();
-//         if (response.status !== 201) {
-//             setError(prediction.detail);
-//             setLoading(false);
-//             return;
-//         }
-//         setPrediction(prediction);
-
-//         while (
-//             prediction.status !== "succeeded" &&
-//             prediction.status !== "failed"
-//         ) {
-//             await sleep(1000);
-//             const response = await fetch("/api/predictions/" + prediction.id);
-//             prediction = await response.json();
-//             if (response.status !== 200) {
-//                 setError(prediction.detail);
-//                 setLoading(false);
-//                 return;
-//             }
-//             setPrediction(prediction);
-//         }
-
-//         setLoading(false);
-//     };
-
-//     const handleDownload = async () => {
-//         const imageUrl = prediction.output[prediction.output.length - 1];
-
-//         // Fetch the image and convert it to a Blob
-//         const response = await fetch(imageUrl);
-//         const blob = await response.blob();
-
-//         // Create a link element and trigger the download
-//         const link = document.createElement('a');
-//         link.href = URL.createObjectURL(blob);
-//         link.download = 'urban-script.png'; // Set a default file name
-//         document.body.appendChild(link);
-//         link.click();
-
-//         // Clean up
-//         document.body.removeChild(link);
-//         URL.revokeObjectURL(link.href); // Free up memory
-//     };
-
-//     return (
-//         <div className="container max-w-2xl mx-auto p-5">
-//             <h1 className="py-6 text-center font-bold text-2xl text-white">
-//                 Generate Images with UrbanScript
-//             </h1>
-
-//             <form className="w-full flex" onSubmit={handleSubmit}>
-//                 <input
-//                     type="text"
-//                     className="flex-grow p-3 rounded-lg bg-white border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-500 transition"
-//                     name="prompt"
-//                     placeholder="Enter a prompt to generate"
-//                 />
-//                 <button className="button" type="submit">
-//                     Generate
-//                 </button>
-//             </form>
-
-//             {error && <div className="text-red-500 py-2">{error}</div>}
-
-//             {loading && (
-//                 <div className="loader-wrapper">
-//                     <div className="loader"></div>
-//                     <p>Processing...</p>
-//                 </div>
-//             )}
-
-//             {prediction && prediction.output && (
-//                 <div className="image-wrapper mt-5 relative">
-//                     <Image
-//                         src={prediction.output[prediction.output.length - 1]}
-//                         alt="output"
-//                         sizes="100vw"
-//                         height={768}
-//                         width={768}
-//                         className="rounded-lg shadow-lg"
-//                     />
-//                     <button
-//                         onClick={handleDownload}
-//                         className="absolute bottom-2 right-2 p-2 bg-blue-600 rounded-full text-white shadow hover:bg-blue-700 transition"
-//                         aria-label="Download image"
-//                     >
-//                         <FontAwesomeIcon icon={faDownload} size="lg" />
-//                     </button>
-//                 </div>
-//             )}
-
-//             {prediction && (
-//                 <p className="py-3 text-sm opacity-50 text-gray-300">
-//                     status: {prediction.status}
-//                 </p>
-//             )}
-
-//             {/* Scoped CSS */}
-//             <style jsx>{`
-//                 .container {
-//                     background: linear-gradient(to bottom right, #1f1c2c, #928dab);
-//                     border-radius: 15px;
-//                     padding: 2rem;
-//                     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-//                 }
-//                 .button {
-//                     background: #38a169; /* Green */
-//                     color: white;
-//                     padding: 1rem 2rem;
-//                     border: none;
-//                     border-radius: 8px;
-//                     font-weight: bold;
-//                     cursor: pointer;
-//                     margin-left: 1rem;
-//                     transition: background 0.3s;
-//                 }
-//                 .button:hover {
-//                     background: #2f855a; /* Darker green */
-//                 }
-//                 .loader-wrapper {
-//                     display: flex;
-//                     align-items: center;
-//                     justify-content: center;
-//                     flex-direction: column;
-//                     padding: 2rem 0;
-//                 }
-//                 .loader {
-//                     border: 8px solid rgba(255, 255, 255, 0.3);
-//                     border-top: 8px solid #fff;
-//                     border-radius: 50%;
-//                     width: 40px;
-//                     height: 40px;
-//                     animation: spin 1s linear infinite;
-//                 }
-//                 @keyframes spin {
-//                     0% {
-//                         transform: rotate(0deg);
-//                     }
-//                     100% {
-//                         transform: rotate(360deg);
-//                     }
-//                 }
-//                 .image-wrapper {
-//                     position: relative;
-//                     overflow: hidden;
-//                 }
-//             `}</style>
-//         </div>
-//     );
-// }
-
 'use client';
 
 import { useState, useEffect, useContext } from "react";
@@ -195,19 +12,21 @@ export const fetchCache = 'force-no-store';
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
 export default function Tool() {
-    const { user } = useContext(AuthContext); // Get the user from the context
-    const router = useRouter(); // Use router for redirection
+    const { user } = useContext(AuthContext);
+    const router = useRouter();
 
-    // Check if the user is authenticated
     useEffect(() => {
         if (!user) {
-            router.push('/login'); // Redirect to the login page if not authenticated
+            router.push('/login');
         }
     }, [user, router]);
 
     const [prediction, setPrediction] = useState(null);
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(false);
+
+    const [numOutputs, setNumOutputs] = useState(1);
+    const [seed, setSeed] = useState('');
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -221,8 +40,11 @@ export default function Tool() {
             },
             body: JSON.stringify({
                 prompt: e.target.prompt.value,
+                num_outputs: parseInt(numOutputs, 10),
+                seed: seed || null,
             }),
         });
+
         let prediction = await response.json();
         if (response.status !== 201) {
             setError(prediction.detail);
@@ -251,43 +73,87 @@ export default function Tool() {
 
     const handleDownload = async () => {
         const imageUrl = prediction.output[prediction.output.length - 1];
-
-        // Fetch the image and convert it to a Blob
         const response = await fetch(imageUrl);
         const blob = await response.blob();
 
-        // Create a link element and trigger the download
         const link = document.createElement('a');
         link.href = URL.createObjectURL(blob);
-        link.download = 'urban-script.png'; // Set a default file name
+        link.download = 'urban-script.png';
         document.body.appendChild(link);
         link.click();
 
-        // Clean up
         document.body.removeChild(link);
-        URL.revokeObjectURL(link.href); // Free up memory
+        URL.revokeObjectURL(link.href);
     };
 
     if (!user) {
-        return null; // Optionally render a loading state or nothing until authentication is confirmed
+        return null;
     }
 
     return (
-        <div className="container max-w-2xl mx-auto p-5">
-            <h1 className="py-6 text-center font-bold text-2xl text-white">
+        <div className="container mx-auto px-4 sm:px-8 md:max-w-3xl lg:max-w-5xl xl:max-w-7xl py-8">
+            <h1 className="py-6 text-center font-bold text-3xl text-white">
                 Generate Images with UrbanScript
             </h1>
 
-            <form className="w-full flex" onSubmit={handleSubmit}>
-                <input
-                    type="text"
-                    className="flex-grow p-3 rounded-lg bg-white border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-500 transition"
-                    name="prompt"
-                    placeholder="Enter a prompt to generate"
-                />
-                <button className="button" type="submit">
-                    Generate
-                </button>
+            {/* Input Form Section */}
+            <form className="w-full flex flex-col gap-4" onSubmit={handleSubmit}>
+                {/* Input and Guidance Section */}
+                <div className="flex flex-col lg:flex-row gap-8">
+                    {/* Left Section: Input Fields */}
+                    <div className="flex flex-col gap-4 w-full lg:w-1/2">
+                        <div className="flex items-center gap-4">
+                            <div className="flex-1">
+                                <label className="block text-white mb-1">
+                                    Number of Outputs (1-4):
+                                </label>
+                                <input
+                                    type="number"
+                                    min="1"
+                                    max="4"
+                                    value={numOutputs}
+                                    onChange={(e) => setNumOutputs(e.target.value)}
+                                    className="p-2 w-24 rounded-lg bg-white border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-500 transition"
+                                    placeholder="1"
+                                />
+                            </div>
+                            <div className="flex-1">
+                                <label className="block text-white mb-1">
+                                    Seed (Optional):
+                                </label>
+                                <input
+                                    type="number"
+                                    value={seed}
+                                    onChange={(e) => setSeed(e.target.value)}
+                                    className="p-2 w-40 rounded-lg bg-white border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-500 transition"
+                                    placeholder="2024"
+                                />
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Right Section: Guidance */}
+                    <div className="flex-1 bg-white rounded-lg p-4 shadow-md">
+                        <h3 className="font-bold mb-2">Guidance</h3>
+                        <p className="text-gray-700">
+                            Use the <b>Number of Outputs</b> field to specify how many images you want to generate (1-4).
+                            The <b>Seed</b> field is optional. If you enter a seed value, the generation will be consistent and reproducible, which is helpful if you want the same output every time.
+                        </p>
+                    </div>
+                </div>
+
+                {/* Existing Prompt Input */}
+                <div className="flex w-full mt-4">
+                    <input
+                        type="text"
+                        className="flex-grow p-3 rounded-lg bg-white border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-500 transition"
+                        name="prompt"
+                        placeholder="Enter a prompt to generate"
+                    />
+                    <button className="button" type="submit">
+                        Generate
+                    </button>
+                </div>
             </form>
 
             {error && <div className="text-red-500 py-2">{error}</div>}
@@ -300,22 +166,26 @@ export default function Tool() {
             )}
 
             {prediction && prediction.output && (
-                <div className="image-wrapper mt-5 relative">
-                    <Image
-                        src={prediction.output[prediction.output.length - 1]}
-                        alt="output"
-                        sizes="100vw"
-                        height={768}
-                        width={768}
-                        className="rounded-lg shadow-lg"
-                    />
-                    <button
-                        onClick={handleDownload}
-                        className="absolute bottom-2 right-2 p-2 bg-blue-600 rounded-full text-white shadow hover:bg-blue-700 transition"
-                        aria-label="Download image"
-                    >
-                        <FontAwesomeIcon icon={faDownload} size="lg" />
-                    </button>
+                <div className={`image-gallery grid gap-4 mt-5 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3`}>
+                    {prediction.output.map((url, index) => (
+                        <div key={index} className="relative image-item">
+                            <Image
+                                src={url}
+                                alt={`Output ${index + 1}`}
+                                sizes="100vw"
+                                height={prediction.output.length === 1 ? 768 : 384}
+                                width={prediction.output.length === 1 ? 768 : 384}
+                                className="rounded-lg shadow-lg"
+                            />
+                            <button
+                                onClick={() => handleDownload(index)}
+                                className="absolute bottom-2 right-2 p-2 bg-blue-600 rounded-full text-white shadow hover:bg-blue-700 transition"
+                                aria-label={`Download image ${index + 1}`}
+                            >
+                                <FontAwesomeIcon icon={faDownload} size="lg" />
+                            </button>
+                        </div>
+                    ))}
                 </div>
             )}
 
@@ -325,7 +195,6 @@ export default function Tool() {
                 </p>
             )}
 
-            {/* Scoped CSS */}
             <style jsx>{`
                 .container {
                     background: linear-gradient(to bottom right, #1f1c2c, #928dab);
@@ -334,7 +203,7 @@ export default function Tool() {
                     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
                 }
                 .button {
-                    background: #38a169; /* Green */
+                    background: #38a169;
                     color: white;
                     padding: 1rem 2rem;
                     border: none;
@@ -345,7 +214,7 @@ export default function Tool() {
                     transition: background 0.3s;
                 }
                 .button:hover {
-                    background: #2f855a; /* Darker green */
+                    background: #2f855a;
                 }
                 .loader-wrapper {
                     display: flex;
@@ -370,7 +239,11 @@ export default function Tool() {
                         transform: rotate(360deg);
                     }
                 }
-                .image-wrapper {
+                .image-gallery {
+                    display: grid;
+                    gap: 1rem;
+                }
+                .image-item {
                     position: relative;
                     overflow: hidden;
                 }
