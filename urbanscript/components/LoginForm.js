@@ -268,7 +268,7 @@ export default function LoginForm() {
               />
               Remember Me
             </label>
-            <Link href="/forgot-password" className="forgot-password">
+            <Link href="/forgot_password" className="forgot-password">
               Forgot Password?
             </Link>
           </div>
