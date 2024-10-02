@@ -2,6 +2,7 @@
 
 import { signOut } from "next-auth/react";
 import { useSession } from "next-auth/react";
+import Link from "next/link";
 import { useState } from "react";
 
 export default function UserInfo() {
@@ -88,9 +89,11 @@ export default function UserInfo() {
             <h2 className="text-lg font-medium">Need help?</h2>
             <p className="text-gray-500">Contact our support team for assistance.</p>
           </div>
-          <button className="py-2 px-4 bg-purple-500 text-white font-bold rounded-lg hover:bg-purple-600 transition-colors">
-            Contact Support
-          </button>
+          <Link href="/contact" passHref legacyBehavior>
+            <button className="py-2 px-4 bg-purple-500 text-white font-bold rounded-lg hover:bg-purple-600 transition-colors">
+              Contact Support
+            </button>
+          </Link>
         </div>
       </div>
     </div>
