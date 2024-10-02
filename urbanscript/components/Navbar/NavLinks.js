@@ -15,6 +15,9 @@ const NavLinks = () => {
             <Link href="/contact" className="px-4 font-extrabold text-gray-500 hover:text-blue-900">
                 Contact Us
             </Link>
+            <Link href="/pricing" className="px-4 font-extrabold text-gray-500 hover:text-blue-900">
+                Pricing
+            </Link>
             <Link href="/dashboard" className="px-4 font-extrabold text-gray-500 hover:text-blue-900">
                 Dashboard
             </Link>
