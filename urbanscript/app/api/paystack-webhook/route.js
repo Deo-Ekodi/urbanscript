@@ -1,6 +1,6 @@
 // pages/api/paystack-webhook.js
 import { connectMongoDB } from "@/library/mongodb/mongodb"; // Import your MongoDB connection logic
-import User from "@/models/User"; // Import your User model
+import User from "@/models/User/User"; // Import your User model
 import { createHmac } from 'crypto';
 
 const PAYSTACK_SECRET_KEY = process.env.PAYSTACK_SECRET_KEY; // Your Paystack secret key
