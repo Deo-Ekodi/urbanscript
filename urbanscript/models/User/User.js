@@ -17,7 +17,7 @@ const UserSchema = new mongoose.Schema({
   },
   credits: {
     type: Number,
-    default: 1, // Initialize credits to 1
+    default: 30, // Initialize credits to 1
   },
   resetToken: {
     type: String,
