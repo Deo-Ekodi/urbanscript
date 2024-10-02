@@ -1,98 +1,7 @@
-// import { connectMongoDB } from "@/library/mongodb/mongodb";
-// import User from "@/models/User/User";
-// import { NextResponse } from "next/server";
-// import nodemailer from "nodemailer";
-
-// export async function POST(req) {
-//   try {
-//     await connectMongoDB();
-
-//     const { email } = await req.json();
-
-//     // Validate email using a regular expression or a validation library
-//     if (!isValidEmail(email)) {
-//       return NextResponse.json(
-//         { message: "Invalid email address" },
-//         { status: 400 }
-//       );
-//     }
-
-//     const user = await User.findOne({ email }).select("_id");
-
-//     if (!user) {
-//       return NextResponse.json(
-//         { message: "User not found" },
-//         { status: 404 }
-//       );
-//     }
-
-//     // Generate a random token and store it in the database
-//     const token = Math.random().toString(36).substr(2, 11);
-//     const tokenExpiration = new Date();
-//     tokenExpiration.setHours(tokenExpiration.getHours() + 1); // Set token expiration to 1 hour
-
-//     await User.updateOne(
-//       { _id: user._id },
-//       { $set: { resetToken: token, resetTokenExpiration: tokenExpiration } }
-//     );
-
-//     // Configure nodemailer for sending email with Gmail SMTP
-//     const transporter = nodemailer.createTransport({
-//       service: "gmail",
-//       auth: {
-//         user: process.env.GMAIL_EMAIL, // Your Gmail address
-//         pass: process.env.GMAIL_PASSWORD, // Your Gmail app password (not regular password)
-//       },
-//     });
-
-//     // Create email content
-//     const resetLink = `https://urbanscript.vercel.app/reset-password?token=${token}`; // Replace with your domain and reset password route
-//     const emailBody = `
-//       <p>You have requested a password reset for your account.</p>
-//       <p>Click on the following link to reset your password:</p>
-//       <a href="${resetLink}">${resetLink}</a>
-//       <p>This link will expire in 1 hour.</p>
-//     `;
-//       // to: 'deogratiusekodi@gmail.com',
-//     const mailOptions = {
-//       from: process.env.GMAIL_EMAIL,
-//       to: email,
-//       subject: "Password Reset Link",
-//       html: emailBody,
-//     };
-
-//     // Send email
-//     await transporter.sendMail(mailOptions);
-
-//     return NextResponse.json(
-//       { message: "Password reset email sent successfully" },
-//       { status: 200 }
-//     );
-//   } catch (error) {
-//     console.error("Error checking user existence: ", error);
-//     return NextResponse.json(
-//       { message: "Error checking user existence", error: error.message },
-//       { status: 500 }
-//     );
-//   }
-// }
-
-// // Helper function to validate email
-// function isValidEmail(email) {
-//   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-//   return emailRegex.test(email);
-// }
-
 import { connectMongoDB } from "@/library/mongodb/mongodb";
 import User from "@/models/User/User";
 import { NextResponse } from "next/server";
-import mailgun from "mailgun-js";
-
-// Initialize Mailgun
-const mg = mailgun({
-  apiKey: process.env.MAILGUN_API_KEY, // Your Mailgun API key
-  domain: process.env.MAILGUN_DOMAIN, // Your Mailgun domain
-});
+import nodemailer from "nodemailer";
 
 export async function POST(req) {
   try {
@@ -127,6 +36,15 @@ export async function POST(req) {
       { $set: { resetToken: token, resetTokenExpiration: tokenExpiration } }
     );
 
+    // Configure nodemailer for sending email with Gmail SMTP
+    const transporter = nodemailer.createTransport({
+      service: "gmail",
+      auth: {
+        user: process.env.GMAIL_EMAIL, // Your Gmail address
+        pass: process.env.GMAIL_PASSWORD, // Your Gmail app password (not regular password)
+      },
+    });
+
     // Create email content
     const resetLink = `https://urbanscript.vercel.app/reset-password?token=${token}`; // Replace with your domain and reset password route
     const emailBody = `
@@ -135,26 +53,16 @@ export async function POST(req) {
       <a href="${resetLink}">${resetLink}</a>
       <p>This link will expire in 1 hour.</p>
     `;
-
-    // Define email options
+      // to: 'deogratiusekodi@gmail.com',
     const mailOptions = {
-      from: `Your Company Name <no-reply@${process.env.MAILGUN_DOMAIN}>`,
+      from: process.env.GMAIL_EMAIL,
       to: email,
       subject: "Password Reset Link",
       html: emailBody,
     };
 
-    // Send email using Mailgun
-    mg.messages().send(mailOptions, (error, body) => {
-      if (error) {
-        console.error("Error sending email: ", error);
-        return NextResponse.json(
-          { message: "Error sending email", error: error.message },
-          { status: 500 }
-        );
-      }
-      console.log("Email sent: ", body);
-    });
+    // Send email
+    await transporter.sendMail(mailOptions);
 
     return NextResponse.json(
       { message: "Password reset email sent successfully" },
@@ -174,3 +82,95 @@ function isValidEmail(email) {
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   return emailRegex.test(email);
 }
+
+// import { connectMongoDB } from "@/library/mongodb/mongodb";
+// import User from "@/models/User/User";
+// import { NextResponse } from "next/server";
+// import mailgun from "mailgun-js";
+
+// // Initialize Mailgun
+// const mg = mailgun({
+//   apiKey: process.env.MAILGUN_API_KEY, // Your Mailgun API key
+//   domain: process.env.MAILGUN_DOMAIN, // Your Mailgun domain
+// });
+
+// export async function POST(req) {
+//   try {
+//     await connectMongoDB();
+
+//     const { email } = await req.json();
+
+//     // Validate email using a regular expression or a validation library
+//     if (!isValidEmail(email)) {
+//       return NextResponse.json(
+//         { message: "Invalid email address" },
+//         { status: 400 }
+//       );
+//     }
+
+//     const user = await User.findOne({ email }).select("_id");
+
+//     if (!user) {
+//       return NextResponse.json(
+//         { message: "User not found" },
+//         { status: 404 }
+//       );
+//     }
+
+//     // Generate a random token and store it in the database
+//     const token = Math.random().toString(36).substr(2, 11);
+//     const tokenExpiration = new Date();
+//     tokenExpiration.setHours(tokenExpiration.getHours() + 1); // Set token expiration to 1 hour
+
+//     await User.updateOne(
+//       { _id: user._id },
+//       { $set: { resetToken: token, resetTokenExpiration: tokenExpiration } }
+//     );
+
+//     // Create email content
+//     const resetLink = `https://urbanscript.vercel.app/reset-password?token=${token}`; // Replace with your domain and reset password route
+//     const emailBody = `
+//       <p>You have requested a password reset for your account.</p>
+//       <p>Click on the following link to reset your password:</p>
+//       <a href="${resetLink}">${resetLink}</a>
+//       <p>This link will expire in 1 hour.</p>
+//     `;
+
+//     // Define email options
+//     const mailOptions = {
+//       from: `Your Company Name <no-reply@${process.env.MAILGUN_DOMAIN}>`,
+//       to: email,
+//       subject: "Password Reset Link",
+//       html: emailBody,
+//     };
+
+//     // Send email using Mailgun
+//     mg.messages().send(mailOptions, (error, body) => {
+//       if (error) {
+//         console.error("Error sending email: ", error);
+//         return NextResponse.json(
+//           { message: "Error sending email", error: error.message },
+//           { status: 500 }
+//         );
+//       }
+//       console.log("Email sent: ", body);
+//     });
+
+//     return NextResponse.json(
+//       { message: "Password reset email sent successfully" },
+//       { status: 200 }
+//     );
+//   } catch (error) {
+//     console.error("Error checking user existence: ", error);
+//     return NextResponse.json(
+//       { message: "Error checking user existence", error: error.message },
+//       { status: 500 }
+//     );
+//   }
+// }
+
+// // Helper function to validate email
+// function isValidEmail(email) {
+//   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+//   return emailRegex.test(email);
+// }
