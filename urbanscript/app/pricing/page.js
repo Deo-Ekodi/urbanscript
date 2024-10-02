@@ -149,13 +149,13 @@ const PricingPage = () => {
         {/* Silver Plan */}
         <PackageCard $bgColor="#e0e0e0" $textColor="#333">
           <PackageTitle>Silver Plan</PackageTitle>
-          <PackagePrice>$99</PackagePrice>
+          <PackagePrice>$50</PackagePrice>
           <PackageFeatures>
             <FeatureItem $featureColor="#000">5 High-Quality Design Renders</FeatureItem>
             <FeatureItem $featureColor="#000">Standard Templates</FeatureItem>
             <FeatureItem $featureColor="#000">Basic Customization Options</FeatureItem>
           </PackageFeatures>
-          <ChooseButton $bgColor="#333" $hoverColor="#555" onClick={() => handlePayment(99)}>
+          <ChooseButton $bgColor="#333" $hoverColor="#555" onClick={() => handlePayment(50)}>
             Buy Credits
           </ChooseButton>
         </PackageCard>
@@ -163,14 +163,14 @@ const PricingPage = () => {
         {/* Gold Plan */}
         <PackageCard $bgColor="#f0c040" $textColor="#fff">
           <PackageTitle>Gold Plan</PackageTitle>
-          <PackagePrice>$199</PackagePrice>
+          <PackagePrice>$55</PackagePrice>
           <PackageFeatures>
             <FeatureItem $featureColor="#fff">15 High-Quality Design Renders</FeatureItem>
             <FeatureItem $featureColor="#fff">Advanced Templates</FeatureItem>
             <FeatureItem $featureColor="#fff">Enhanced Customization Options</FeatureItem>
             <FeatureItem $featureColor="#fff">Priority Support</FeatureItem>
           </PackageFeatures>
-          <ChooseButton $bgColor="#fff" $hoverColor="#f0c040" onClick={() => handlePayment(199)}>
+          <ChooseButton $bgColor="#fff" $hoverColor="#f0c040" onClick={() => handlePayment(55)}>
             Buy Credits
           </ChooseButton>
         </PackageCard>
@@ -178,7 +178,7 @@ const PricingPage = () => {
         {/* Platinum Plan */}
         <PackageCard $bgColor="#e5e4e2" $textColor="#333">
           <PackageTitle>Platinum Plan</PackageTitle>
-          <PackagePrice>$299</PackagePrice>
+          <PackagePrice>$60</PackagePrice>
           <PackageFeatures>
             <FeatureItem $featureColor="#000">Unlimited High-Quality Design Renders</FeatureItem>
             <FeatureItem $featureColor="#000">Premium Templates</FeatureItem>
@@ -186,7 +186,7 @@ const PricingPage = () => {
             <FeatureItem $featureColor="#000">Dedicated Support & Consulting</FeatureItem>
             <FeatureItem $featureColor="#000">High-Resolution Exports</FeatureItem>
           </PackageFeatures>
-          <ChooseButton $bgColor="#333" $hoverColor="#555" onClick={() => handlePayment(299)}>
+          <ChooseButton $bgColor="#333" $hoverColor="#555" onClick={() => handlePayment(60)}>
             Buy Credits
           </ChooseButton>
         </PackageCard>
