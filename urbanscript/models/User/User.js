@@ -1,6 +1,7 @@
 // models/User.js - schema to store user data
 import mongoose from 'mongoose';
 
+
 const UserSchema = new mongoose.Schema({
   name: {
     type: String,
@@ -13,11 +14,11 @@ const UserSchema = new mongoose.Schema({
   },
   password: {
     type: String,
-    required: true,
+    required: false,
   },
   credits: {
     type: Number,
-    default: 2, // Initialize credits to 1
+    default: 2,
   },
   resetToken: {
     type: String,
@@ -33,7 +34,7 @@ const UserSchema = new mongoose.Schema({
   },
   verified: {
     type: Boolean,
-    default: false, // Set to false by default
+    default: false,
   },
 }, { timestamps: true });
 
