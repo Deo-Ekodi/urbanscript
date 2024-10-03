@@ -5,11 +5,13 @@ function ForgotPassword() {
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
+  const [loading, setLoading] = useState(false); // New state for loading
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setErrorMessage(''); // Clear previous error messages
     setMessage(''); // Clear previous success messages
+    setLoading(true); // Set loading state to true
 
     try {
       const response = await fetch('/api/auth/forgot_password', {
@@ -25,10 +27,12 @@ function ForgotPassword() {
       }
 
       // Handle successful response (e.g., show a success message)
-      setMessage('Password reset email sent successfully! Please check your inbox.');
+      setMessage('Password reset email sent successfully! Please check your inbox (and your spam folder).');
       setEmail(''); // Clear email field after success
     } catch (error) {
       setErrorMessage(error.message);
+    } finally {
+      setLoading(false); // Reset loading state regardless of success or failure
     }
   };
 
@@ -47,7 +51,20 @@ function ForgotPassword() {
             className="w-full p-2 rounded border border-gray-600 bg-gray-700 text-white"
           />
         </div>
-        <button type="submit" className="w-full bg-blue-500 hover:bg-blue-600 text-white p-2 rounded">Send Password Reset Email</button>
+        <button 
+          type="submit" 
+          className="w-full bg-blue-500 hover:bg-blue-600 text-white p-2 rounded"
+          disabled={loading} // Disable button when loading
+        >
+          {loading ? (
+            <span className="loading-container">
+              <div className="loader"></div>
+              <span>Sending...</span>
+            </span>
+          ) : (
+            "Send Password Reset Email"
+          )}
+        </button>
 
         {/* Display messages inside the form card */}
         {message && <p className="text-green-400 mt-4">{message}</p>}
@@ -81,6 +98,20 @@ function ForgotPassword() {
           `)}');
           background-size: cover;
           background-repeat: no-repeat;
+        }
+        .loading-container {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+        .loader {
+          border: 4px solid rgba(255, 255, 255, 0.3);
+          border-radius: 50%;
+          border-top: 4px solid #fff;
+          width: 16px;
+          height: 16px;
+          animation: spin 1s linear infinite;
+          margin-right: 8px; /* Space between loader and text */
         }
       `}</style>
     </div>

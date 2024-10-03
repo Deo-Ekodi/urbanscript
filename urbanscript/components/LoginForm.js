@@ -1,196 +1,3 @@
-// "use client";
-
-// import Link from "next/link";
-// import { useState } from "react";
-// import { signIn } from "next-auth/react";
-// import { useRouter } from "next/navigation";
-
-// export default function LoginForm() {
-//   const [email, setEmail] = useState("");
-//   const [password, setPassword] = useState("");
-//   const [error, setError] = useState("");
-//   const [loading, setLoading] = useState(false);
-
-//   const router = useRouter();
-
-//   const handleSubmit = async (e) => {
-//     e.preventDefault();
-//     setLoading(true);
-
-//     try {
-//       const res = await signIn("credentials", {
-//         email,
-//         password,
-//         redirect: false,
-//       });
-
-//       if (res.error) {
-//         setError("Invalid Credentials");
-//         setLoading(false);
-//         return;
-//       }
-
-//       router.replace("/dashboard");
-//     } catch (error) {
-//       setError("Something went wrong");
-//       setLoading(false);
-//     }
-//   };
-
-//   return (
-//     <div
-//       style={{
-//         display: "flex",
-//         height: "100vh",
-//         background: "linear-gradient(to bottom right, #1f1c2c, #928dab)",
-//       }}
-//     >
-
-//       <div
-//         style={{
-//           flex: 1,
-//           display: "flex",
-//           justifyContent: "center",
-//           alignItems: "center",
-//           padding: "40px",
-//         }}
-//       >
-//         <div
-//           style={{
-//             padding: "50px",
-//             borderRadius: "15px",
-//             background: "rgba(0, 0, 0, 0.7)",
-//             backdropFilter: "blur(10px)",
-//             border: "1px solid rgba(255, 255, 255, 0.3)",
-//             width: "450px",
-//             boxShadow: "0 20px 30px rgba(0, 0, 0, 0.6)",
-//             color: "#fff",
-//           }}
-//         >
-//           <h1 style={{ fontSize: "34px", fontWeight: "bold", textAlign: "center", marginBottom: "30px" }}>
-//             Login
-//           </h1>
-
-//           <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
-//             <input
-//               onChange={(e) => setEmail(e.target.value)}
-//               type="text"
-//               placeholder="Email"
-//               style={{
-//                 padding: "15px",
-//                 border: "2px solid transparent",
-//                 borderRadius: "10px",
-//                 background: "rgba(255, 255, 255, 0.2)",
-//                 color: "#fff",
-//                 fontSize: "16px",
-//                 transition: "border 0.3s ease-in-out",
-//               }}
-//               onFocus={(e) => (e.target.style.border = "2px solid #48bb78")}
-//               onBlur={(e) => (e.target.style.border = "2px solid transparent")}
-//             />
-//             <input
-//               onChange={(e) => setPassword(e.target.value)}
-//               type="password"
-//               placeholder="Password"
-//               style={{
-//                 padding: "15px",
-//                 border: "2px solid transparent",
-//                 borderRadius: "10px",
-//                 background: "rgba(255, 255, 255, 0.2)",
-//                 color: "#fff",
-//                 fontSize: "16px",
-//                 transition: "border 0.3s ease-in-out",
-//               }}
-//               onFocus={(e) => (e.target.style.border = "2px solid #48bb78")}
-//               onBlur={(e) => (e.target.style.border = "2px solid transparent")}
-//             />
-//             <button
-//               style={{
-//                 padding: "16px",
-//                 border: "none",
-//                 borderRadius: "10px",
-//                 background: "linear-gradient(45deg, #38a169, #48bb78)",
-//                 color: "#fff",
-//                 fontWeight: "bold",
-//                 cursor: "pointer",
-//                 fontSize: "16px",
-//                 transition: "transform 0.3s ease",
-//               }}
-//               onMouseOver={(e) => (e.target.style.transform = "scale(1.05)")}
-//               onMouseOut={(e) => (e.target.style.transform = "scale(1)")}
-//             >
-//               {loading ? (
-//                 <span style={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
-//                   <div className="loader"></div>
-//                   <span style={{ marginLeft: "10px" }}>Loading...</span>
-//                 </span>
-//               ) : (
-//                 "Login"
-//               )}
-//             </button>
-//             {error && (
-//               <div
-//                 style={{
-//                   backgroundColor: "#e53e3e",
-//                   color: "#fff",
-//                   padding: "10px 16px",
-//                   borderRadius: "8px",
-//                   textAlign: "center",
-//                 }}
-//               >
-//                 {error}
-//               </div>
-//             )}
-
-//             <Link href={"/register"} style={{ color: "#81e6d9", textAlign: "center", marginTop: "20px", textDecoration: "underline" }}>
-//               Don't have an account? Register here
-//             </Link>
-//           </form>
-//         </div>
-//       </div>
-
-//       <style jsx>{`
-//         @keyframes float {
-//           0% {
-//             transform: translateY(0);
-//           }
-//           50% {
-//             transform: translateY(-10px);
-//           }
-//           100% {
-//             transform: translateY(0);
-//           }
-//         }
-//         @keyframes fadeIn {
-//           from {
-//             opacity: 0;
-//           }
-//           to {
-//             opacity: 1;
-//           }
-//         }
-//         .loader {
-//           border: 4px solid rgba(255, 255, 255, 0.3);
-//           border-radius: 50%;
-//           border-top: 4px solid #fff;
-//           width: 16px;
-//           height: 16px;
-//           animation: spin 1s linear infinite;
-//         }
-//         @keyframes spin {
-//           0% {
-//             transform: rotate(0deg);
-//           }
-//           100% {
-//             transform: rotate(360deg);
-//           }
-//         }
-//       `}</style>
-//     </div>
-//   );
-// }
-
-
 "use client";
 
 import Link from "next/link";
@@ -219,14 +26,22 @@ export default function LoginForm() {
       });
 
       if (res.error) {
-        setError("Invalid Credentials");
+        if (res.error.includes("not verified")) {
+          setError("Your account is not verified. Please check your email for verification.");
+        } else if (res.error.includes("No user found")) {
+          setError("No user found with this email.");
+        } else if (res.error.includes("Password is incorrect")) {
+          setError("Incorrect password. Please try again.");
+        } else {
+          setError("Invalid credentials. Please check your email and password.");
+        }
         setLoading(false);
         return;
       }
 
       router.replace("/dashboard");
     } catch (error) {
-      setError("Something went wrong");
+      setError("An unexpected error occurred. Please try again later.");
       setLoading(false);
     }
   };
@@ -244,8 +59,7 @@ export default function LoginForm() {
             type="text"
             placeholder="Email"
             className="input"
-            onFocus={(e) => (e.target.style.border = "2px solid #48bb78")}
-            onBlur={(e) => (e.target.style.border = "2px solid transparent")}
+            required
           />
 
           {/* Password Input */}
@@ -254,8 +68,7 @@ export default function LoginForm() {
             type="password"
             placeholder="Password"
             className="input"
-            onFocus={(e) => (e.target.style.border = "2px solid #48bb78")}
-            onBlur={(e) => (e.target.style.border = "2px solid transparent")}
+            required
           />
 
           {/* Remember Me & Forgot Password */}
@@ -274,7 +87,7 @@ export default function LoginForm() {
           </div>
 
           {/* Login Button */}
-          <button className="login-button">
+          <button className="login-button" disabled={loading}>
             {loading ? (
               <span className="loading-container">
                 <div className="loader"></div>
@@ -306,21 +119,13 @@ export default function LoginForm() {
         }
         .login-card {
           padding: 50px;
-          background: rgba(0, 0, 0, 0.7);
+          background: rgba(0, 0, 0, 0.8);
           border-radius: 15px;
           backdrop-filter: blur(10px);
           width: 450px;
           box-shadow: 0 20px 30px rgba(0, 0, 0, 0.6);
           color: #fff;
           animation: fadeIn 0.7s ease-in-out;
-        }
-        .logo-container {
-          display: flex;
-          justify-content: center;
-          margin-bottom: 30px;
-        }
-        .logo {
-          width: 100px;
         }
         .title {
           text-align: center;
@@ -341,6 +146,10 @@ export default function LoginForm() {
           color: #fff;
           font-size: 16px;
           transition: border 0.3s ease-in-out;
+          outline: none;
+        }
+        .input:focus {
+          border-color: #48bb78;
         }
         .login-button {
           padding: 16px;
@@ -355,6 +164,10 @@ export default function LoginForm() {
         }
         .login-button:hover {
           transform: scale(1.05);
+        }
+        .login-button:disabled {
+          background: #48bb78;
+          cursor: not-allowed;
         }
         .loading-container {
           display: flex;

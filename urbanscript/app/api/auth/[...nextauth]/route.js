@@ -18,18 +18,24 @@ export const authOptions = {
           const user = await User.findOne({ email });
 
           if (!user) {
-            return null;
+            throw new Error("No user found with this email.");
           }
 
           const passwordsMatch = await bcrypt.compare(password, user.password);
 
           if (!passwordsMatch) {
-            return null;
+            throw new Error("Password is incorrect.");
+          }
+
+          // Check if the user is verified
+          if (!user.verified) {
+            throw new Error("Your account is not verified. Please check your email.");
           }
 
           return user;
         } catch (error) {
           console.log("Error: ", error);
+          throw new Error(error.message); // This message can be displayed to the user
         }
       },
     }),
@@ -39,7 +45,7 @@ export const authOptions = {
   },
   secret: process.env.NEXTAUTH_SECRET,
   pages: {
-    signIn: "/",
+    signIn: "/", // Redirect to sign-in page if unauthorized
   },
 };
 
