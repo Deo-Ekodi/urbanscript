@@ -54,10 +54,11 @@ export async function POST(req) {
     await transporter.sendMail(mailOptions, (err, info) => {
       if (err) {
         console.error("Error sending email: ", err);
-      } else {
-        console.log("Email sent: ", info.response);
-        console.log("token sent: ", verificationToken);
-      }
+      } 
+      // else {
+        // console.log("Email sent: ", info.response);
+        // console.log("token sent: ", verificationToken);
+      // }
     });
     
 

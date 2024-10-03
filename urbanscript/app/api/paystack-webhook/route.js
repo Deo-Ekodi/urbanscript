@@ -10,11 +10,8 @@ export const POST = async (req) => {
   }
 
   const rawBody = await req.text();
-  const sig = req.headers.get('x-paystack-signature'); // Updated here
+  const sig = req.headers.get('x-paystack-signature');
   const hash = createHmac('sha512', PAYSTACK_SECRET_KEY).update(rawBody).digest('hex');
-
-  console.log(sig);
-  console.log(hash);
 
   if (sig !== hash) {
     return new Response('Unauthorized', { status: 401 });
@@ -24,22 +21,43 @@ export const POST = async (req) => {
 
   if (event === 'charge.success') {
     try {
-      await connectMongoDB(); // Connect to the MongoDB server
+      await connectMongoDB(); // Connect to MongoDB
 
-      // Check if the user exists in the database
-      const user = await User.findOne({ email: data.customer.email }).select("_id credits"); // Select _id and credits fields
-      console.log("User found: ", user); // Log the user for debugging
+      const user = await User.findOne({ email: data.customer.email }).select("_id credits"); // Find the user by email
 
       if (user) {
-        // Update user credits based on the amount received
-        user.credits += data.amount / 1000; // Assuming amount is in kobo
-        await user.save(); // Save the updated user data
-        console.log(`User credits updated: ${user.credits}`); // Log updated credits for verification
-      } else {
-        console.log("User not found"); // Log if the user does not exist
-      }
+        const { currency, amount } = data; // Get currency and amount from Paystack data
 
-      return new Response('Webhook received and user credits updated', { status: 200 });
+        // Logic for USD transactions
+        if (currency === 'USD') {
+          if (amount === 800) {
+            user.credits += 50; // $8 = 50 credits
+          } else if (amount === 1300) {
+            user.credits += 100; // $13 = 100 credits
+          } else if (amount === 2500) {
+            user.credits += 250; // $25 = 250 credits
+          }
+        }
+
+        // Logic for KES transactions
+        if (currency === 'KES') {
+          if (amount === 100000) {
+            user.credits += 50; // Ksh 1000 = 50 credits
+          } else if (amount === 170000) {
+            user.credits += 100; // Ksh 1700 = 100 credits
+          } else if (amount === 325000) {
+            user.credits += 250; // Ksh 3250 = 250 credits
+          }
+        }
+
+        await user.save(); // Save the updated user data
+        // console.log(`User credits updated: ${user.credits}`); // Log updated credits
+
+        return new Response('Webhook received and user credits updated', { status: 200 });
+      } else {
+        // console.log("User not found");
+        return new Response('User not found', { status: 404 });
+      }
     } catch (error) {
       console.error("Error updating user credits: ", error);
       return new Response('Internal Server Error', { status: 500 });
