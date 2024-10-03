@@ -31,10 +31,10 @@ const RefundPolicy = () => {
                         Our services rely on extensive computing infrastructure, which incurs significant costs that cannot be easily reversed once funds are received. Payments you make contribute to the ongoing maintenance and operation of our servers, ensuring uninterrupted service for all users.
                     </p>
 
-                    <h2 className="text-2xl font-semibold mb-4">Explore Before Purchase</h2>
+                    {/* <h2 className="text-2xl font-semibold mb-4">Explore Before Purchase</h2>
                     <p className="mb-4">
                         We highly recommend exploring our community page before making any purchases. There, you can view daily generated designs from other users, which may help you understand the possibilities and limitations of AI-generated imagery. We believe in transparency and encourage you to make an informed decision before using our tool.
-                    </p>
+                    </p> */}
 
                     <h2 className="text-2xl font-semibold mb-4">Alternative Solutions</h2>
                     <p className="mb-4">

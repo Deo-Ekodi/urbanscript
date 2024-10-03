@@ -33,7 +33,7 @@ function ResetPassword() {
       }
 
       // Handle successful password reset (e.g., redirect to login page)
-      console.log('Password reset successfully');
+      // console.log('Password reset successfully');
       router.push('/login');
     } catch (error) {
       setErrorMessage(error.message);

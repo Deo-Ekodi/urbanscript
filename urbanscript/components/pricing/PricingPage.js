@@ -1,15 +1,15 @@
 // 'use client';
-// import React, { useEffect } from 'react';
+// import React, { useEffect, useState } from 'react';
 // import styled from 'styled-components';
+// import Link from 'next/link';
 // import { useSession } from 'next-auth/react';
 
-// // Styled Components
 // const PageContainer = styled.div`
 //   text-align: center;
 //   background: linear-gradient(135deg, #f4f4f4, #ffffff);
 //   padding: 20px;
 //   font-family: Arial, sans-serif;
-//   background-image: url('/path-to-your-doodle-image.png'); /* Replace with your doodle image */
+//   background-image: url('/path-to-your-doodle-image.png');
 //   background-repeat: no-repeat;
 //   background-size: cover;
 //   background-position: center;
@@ -31,6 +31,26 @@
 //   font-size: 1.2em;
 //   margin-bottom: 20px;
 //   color: #666;
+// `;
+
+// const Banner = styled.div`
+//   background-color: #ffeb3b;
+//   color: #333;
+//   padding: 15px;
+//   margin: 20px 0;
+//   font-size: 1.2em;
+//   border-radius: 8px;
+//   text-align: center;
+//   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+// `;
+
+// const BannerLink = styled(Link)`
+//   color: #000;
+//   font-weight: bold;
+//   text-decoration: underline;
+//   &:hover {
+//     color: #ff9800;
+//   }
 // `;
 
 // const PackagesSection = styled.section`
@@ -100,34 +120,63 @@
 //   }
 // `;
 
-// // Main Component for Pricing Page
+// const CurrencySelect = styled.select`
+//   padding: 10px;
+//   margin-bottom: 20px;
+//   border: 1px solid #ddd;
+//   border-radius: 5px;
+//   font-size: 1em;
+// `;
+
 // const PricingPage = () => {
 //   const { data: session } = useSession();
+//   const [currency, setCurrency] = useState('USD'); // Default currency to USD
+//   const [prices, setPrices] = useState({
+//     silver: 50,
+//     gold: 300,
+//     platinum: 600,
+//   });
 
 //   useEffect(() => {
 //     const script = document.createElement('script');
-//     script.src = 'https://js.paystack.co/v1/inline.js'; // Paystack inline script
+//     script.src = 'https://js.paystack.co/v1/inline.js';
 //     script.async = true;
 //     document.body.appendChild(script);
 
 //     return () => {
-//       document.body.removeChild(script); // Cleanup script when component unmounts
+//       document.body.removeChild(script);
 //     };
 //   }, []);
+
+//   useEffect(() => {
+//     // Update prices based on selected currency
+//     if (currency === 'USD') {
+//       setPrices({
+//         silver: 8, // 5 USD
+//         gold: 13,  // 30 USD
+//         platinum: 25, // 60 USD
+//       });
+//     } else if (currency === 'KES') {
+//       setPrices({
+//         silver: 1000,  // 50 KES
+//         gold: 1700,   // 300 KES
+//         platinum: 3250, // 600 KES
+//       });
+//     }
+//   }, [currency]);
 
 //   const handlePayment = (amount) => {
 //     if (!session) {
 //       alert('Please log in to make a purchase.');
 //       return;
 //     }
-  
+
 //     const handler = PaystackPop.setup({
-//       key: process.env.NEXT_PUBLIC_PAYSTACK_PUBLIC_KEY, // Replace with your Paystack public key
-//       email: session.user.email, // Use the email from session
-//       amount: amount * 100, // Amount in kobo
-//       currency: 'KES', // Currency
+//       key: process.env.NEXT_PUBLIC_PAYSTACK_PUBLIC_KEY,
+//       email: session.user.email,
+//       amount: amount * 100, // Amount in the selected currency
+//       currency: currency, // Currency (USD or KES)
 //       callback: function (response) {
-//         // Redirect to success page with the response reference if needed
 //         window.location.href = `/payment-success?reference=${response.reference}`;
 //       },
 //       onClose: function () {
@@ -136,7 +185,6 @@
 //     });
 //     handler.openIframe();
 //   };
-  
 
 //   return (
 //     <PageContainer>
@@ -147,17 +195,27 @@
 //         </Subheading>
 //       </HeroSection>
 
+//       {/* Currency Selector */}
+//       <CurrencySelect value={currency} onChange={(e) => setCurrency(e.target.value)}>
+//         <option value="USD">USD</option>
+//         <option value="KES">KES</option>
+//       </CurrencySelect>
+
+//       <Banner>
+//         Please review our <BannerLink href="/refund-policy">Refund Policy</BannerLink> before making any payments. We do not offer refunds after purchase.
+//       </Banner>
+
 //       <PackagesSection>
 //         {/* Silver Plan */}
 //         <PackageCard $bgColor="#e0e0e0" $textColor="#333">
 //           <PackageTitle>Silver Plan</PackageTitle>
-//           <PackagePrice>KES 50</PackagePrice>
+//           <PackagePrice>{prices.silver} {currency}</PackagePrice>
 //           <PackageFeatures>
-//             <FeatureItem $featureColor="#000">5 Credits</FeatureItem>
-//             <FeatureItem $featureColor="#000">Standard Templates</FeatureItem>
-//             <FeatureItem $featureColor="#000">Basic Customization Options</FeatureItem>
+//             <FeatureItem $featureColor="#000">50 Credits</FeatureItem>
+//             <FeatureItem $featureColor="#000">Latest AI model</FeatureItem>
+//             <FeatureItem $featureColor="#000">High-Resolution Exports</FeatureItem>
 //           </PackageFeatures>
-//           <ChooseButton $bgColor="#333" $hoverColor="#555" onClick={() => handlePayment(50)}>
+//           <ChooseButton $bgColor="#333" $hoverColor="#555" onClick={() => handlePayment(prices.silver)}>
 //             Buy Credits
 //           </ChooseButton>
 //         </PackageCard>
@@ -165,14 +223,13 @@
 //         {/* Gold Plan */}
 //         <PackageCard $bgColor="#f0c040" $textColor="#fff">
 //           <PackageTitle>Gold Plan</PackageTitle>
-//           <PackagePrice>KES 300</PackagePrice>
+//           <PackagePrice>{prices.gold} {currency}</PackagePrice>
 //           <PackageFeatures>
-//             <FeatureItem $featureColor="#fff">15 Credits</FeatureItem>
-//             <FeatureItem $featureColor="#fff">High Quality Images</FeatureItem>
-//             <FeatureItem $featureColor="#fff">Enhanced Customization Options</FeatureItem>
-//             <FeatureItem $featureColor="#fff">Priority Support</FeatureItem>
+//             <FeatureItem $featureColor="#fff">100 Credits</FeatureItem>
+//             <FeatureItem $featureColor="#fff">Latest AI model</FeatureItem>
+//             <FeatureItem $featureColor="#fff">High-Resolution Exports</FeatureItem>
 //           </PackageFeatures>
-//           <ChooseButton $bgColor="#333" $hoverColor="#555" onClick={() => handlePayment(50)}>
+//           <ChooseButton $bgColor="#333" $hoverColor="#555" onClick={() => handlePayment(prices.gold)}>
 //             Buy Credits
 //           </ChooseButton>
 //         </PackageCard>
@@ -180,21 +237,18 @@
 //         {/* Platinum Plan */}
 //         <PackageCard $bgColor="#e5e4e2" $textColor="#333">
 //           <PackageTitle>Platinum Plan</PackageTitle>
-//           <PackagePrice>KES 600</PackagePrice>
+//           <PackagePrice>{prices.platinum} {currency}</PackagePrice>
 //           <PackageFeatures>
-//             <FeatureItem $featureColor="#000">100 Credits</FeatureItem>
-//             <FeatureItem $featureColor="#000">High Quality images</FeatureItem>
-//             <FeatureItem $featureColor="#000">Full Customization Options</FeatureItem>
-//             <FeatureItem $featureColor="#000">Dedicated Support & Consulting</FeatureItem>
+//             <FeatureItem $featureColor="#000">250 Credits</FeatureItem>
+//             <FeatureItem $featureColor="#000">Latest AI model</FeatureItem>
 //             <FeatureItem $featureColor="#000">High-Resolution Exports</FeatureItem>
 //           </PackageFeatures>
-//           <ChooseButton $bgColor="#333" $hoverColor="#555" onClick={() => handlePayment(600)}>
+//           <ChooseButton $bgColor="#333" $hoverColor="#555" onClick={() => handlePayment(prices.platinum)}>
 //             Buy Credits
 //           </ChooseButton>
 //         </PackageCard>
 //       </PackagesSection>
 
-//       {/* Footer */}
 //       <footer>
 //         <p>&copy; 2024 Urban Script LLC. All rights reserved.</p>
 //       </footer>
@@ -206,39 +260,38 @@
 
 
 'use client';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import Link from 'next/link'; // Use Next.js Link component
+import Link from 'next/link';
 import { useSession } from 'next-auth/react';
 
-// Styled Components
 const PageContainer = styled.div`
   text-align: center;
-  background: linear-gradient(135deg, #f4f4f4, #ffffff);
   padding: 20px;
-  font-family: Arial, sans-serif;
-  background-image: url('/path-to-your-doodle-image.png'); /* Replace with your doodle image */
+  font-family: 'Arial', sans-serif;
+  background-color: #1a1a1a; /* Dark background */
+  background-image: url('/path-to-your-doodle-image.png'); /* Cool doodle background */
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
+  overflow: hidden; /* Ensure no overflow */
 `;
 
 const HeroSection = styled.section`
   padding: 40px;
-  background-color: #fafafa;
   border-bottom: 1px solid #ddd;
 `;
 
 const Heading = styled.h1`
   font-size: 3em;
   margin-bottom: 10px;
-  color: #333;
+  color: #ffeb3b; /* Bright color for contrast */
 `;
 
 const Subheading = styled.p`
   font-size: 1.2em;
   margin-bottom: 20px;
-  color: #666;
+  color: #ffffff; /* Light color for better readability */
 `;
 
 const Banner = styled.div`
@@ -249,7 +302,7 @@ const Banner = styled.div`
   font-size: 1.2em;
   border-radius: 8px;
   text-align: center;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 10px rgba(255, 235, 59, 0.5);
 `;
 
 const BannerLink = styled(Link)`
@@ -272,18 +325,19 @@ const PackagesSection = styled.section`
 `;
 
 const PackageCard = styled.div`
-  background: ${(props) => props.$bgColor || '#fff'};
-  color: ${(props) => props.$textColor || '#000'};
+  background: rgba(255, 255, 255, 0.1); /* Semi-transparent background */
+  color: #fff;
   border-radius: 10px;
   padding: 30px;
   width: 300px;
-  margin: 0 20px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  transition: all 0.3s ease;
+  margin: 20px;
+  backdrop-filter: blur(10px); /* Blur effect for cool aura */
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 
   &:hover {
     transform: translateY(-10px);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 8px 40px rgba(255, 255, 255, 0.2); /* Glow effect on hover */
   }
 
   @media (max-width: 768px) {
@@ -292,8 +346,9 @@ const PackageCard = styled.div`
 `;
 
 const PackageTitle = styled.h2`
-  font-size: 2em;
+  font-size: 2.2em;
   margin-bottom: 20px;
+  text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.7); /* Shadow for depth */
 `;
 
 const PackagePrice = styled.p`
@@ -310,52 +365,83 @@ const PackageFeatures = styled.ul`
 
 const FeatureItem = styled.li`
   margin: 10px 0;
-  color: ${(props) => props.$featureColor || '#000'};
+  color: #ffffff; /* Light color for better readability */
 `;
 
 const ChooseButton = styled.button`
   padding: 10px 20px;
-  background-color: ${(props) => props.$bgColor || '#333'};
-  color: #fff;
+  background-color: #ffeb3b; /* Bright button */
+  color: #333;
   border: none;
   border-radius: 5px;
   font-size: 1em;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: background-color 0.2s ease;
 
   &:hover {
-    background-color: ${(props) => props.$hoverColor || '#555'};
+    background-color: #fdd835; /* Lighter on hover */
   }
 `;
 
-// Main Component for Pricing Page
+const CurrencySelect = styled.select`
+  padding: 10px;
+  margin-bottom: 20px;
+  border: none;
+  border-radius: 5px;
+  font-size: 1em;
+  background-color: #333; /* Dark background for select */
+  color: #fff; /* Light text color */
+`;
+
 const PricingPage = () => {
   const { data: session } = useSession();
+  const [currency, setCurrency] = useState('USD'); // Default currency to USD
+  const [prices, setPrices] = useState({
+    silver: 50,
+    gold: 300,
+    platinum: 600,
+  });
 
   useEffect(() => {
     const script = document.createElement('script');
-    script.src = 'https://js.paystack.co/v1/inline.js'; // Paystack inline script
+    script.src = 'https://js.paystack.co/v1/inline.js';
     script.async = true;
     document.body.appendChild(script);
 
     return () => {
-      document.body.removeChild(script); // Cleanup script when component unmounts
+      document.body.removeChild(script);
     };
   }, []);
+
+  useEffect(() => {
+    // Update prices based on selected currency
+    if (currency === 'USD') {
+      setPrices({
+        silver: 8, // 5 USD
+        gold: 13,  // 30 USD
+        platinum: 25, // 60 USD
+      });
+    } else if (currency === 'KES') {
+      setPrices({
+        silver: 1000,  // 50 KES
+        gold: 1700,   // 300 KES
+        platinum: 3250, // 600 KES
+      });
+    }
+  }, [currency]);
 
   const handlePayment = (amount) => {
     if (!session) {
       alert('Please log in to make a purchase.');
       return;
     }
-  
+
     const handler = PaystackPop.setup({
-      key: process.env.NEXT_PUBLIC_PAYSTACK_PUBLIC_KEY, // Replace with your Paystack public key
-      email: session.user.email, // Use the email from session
-      amount: amount * 100, // Amount in kobo
-      currency: 'KES', // Currency
+      key: process.env.NEXT_PUBLIC_PAYSTACK_PUBLIC_KEY,
+      email: session.user.email,
+      amount: amount * 100, // Amount in the selected currency
+      currency: currency, // Currency (USD or KES)
       callback: function (response) {
-        // Redirect to success page with the response reference if needed
         window.location.href = `/payment-success?reference=${response.reference}`;
       },
       onClose: function () {
@@ -374,61 +460,62 @@ const PricingPage = () => {
         </Subheading>
       </HeroSection>
 
-      {/* Refund Policy Warning Banner */}
+      {/* Currency Selector */}
+      <CurrencySelect value={currency} onChange={(e) => setCurrency(e.target.value)}>
+        <option value="USD">USD</option>
+        <option value="KES">KES</option>
+      </CurrencySelect>
+
       <Banner>
         Please review our <BannerLink href="/refund-policy">Refund Policy</BannerLink> before making any payments. We do not offer refunds after purchase.
       </Banner>
 
       <PackagesSection>
         {/* Silver Plan */}
-        <PackageCard $bgColor="#e0e0e0" $textColor="#333">
+        <PackageCard>
           <PackageTitle>Silver Plan</PackageTitle>
-          <PackagePrice>KES 50</PackagePrice>
+          <PackagePrice>{prices.silver} {currency}</PackagePrice>
           <PackageFeatures>
-            <FeatureItem $featureColor="#000">5 Credits</FeatureItem>
-            <FeatureItem $featureColor="#000">Standard Templates</FeatureItem>
-            <FeatureItem $featureColor="#000">Basic Customization Options</FeatureItem>
+            <FeatureItem>50 Credits</FeatureItem>
+            <FeatureItem>Latest AI model</FeatureItem>
+            <FeatureItem>High-Resolution Exports</FeatureItem>
           </PackageFeatures>
-          <ChooseButton $bgColor="#333" $hoverColor="#555" onClick={() => handlePayment(50)}>
+          <ChooseButton onClick={() => handlePayment(prices.silver)}>
             Buy Credits
           </ChooseButton>
         </PackageCard>
 
         {/* Gold Plan */}
-        <PackageCard $bgColor="#f0c040" $textColor="#fff">
+        <PackageCard>
           <PackageTitle>Gold Plan</PackageTitle>
-          <PackagePrice>KES 300</PackagePrice>
+          <PackagePrice>{prices.gold} {currency}</PackagePrice>
           <PackageFeatures>
-            <FeatureItem $featureColor="#fff">15 Credits</FeatureItem>
-            <FeatureItem $featureColor="#fff">High Quality Images</FeatureItem>
-            <FeatureItem $featureColor="#fff">Enhanced Customization Options</FeatureItem>
-            <FeatureItem $featureColor="#fff">Priority Support</FeatureItem>
+            <FeatureItem>100 Credits</FeatureItem>
+            <FeatureItem>Latest AI model</FeatureItem>
+            <FeatureItem>High-Resolution Exports</FeatureItem>
           </PackageFeatures>
-          <ChooseButton $bgColor="#333" $hoverColor="#555" onClick={() => handlePayment(50)}>
+          <ChooseButton onClick={() => handlePayment(prices.gold)}>
             Buy Credits
           </ChooseButton>
         </PackageCard>
 
         {/* Platinum Plan */}
-        <PackageCard $bgColor="#e5e4e2" $textColor="#333">
+        <PackageCard>
           <PackageTitle>Platinum Plan</PackageTitle>
-          <PackagePrice>KES 600</PackagePrice>
+          <PackagePrice>{prices.platinum} {currency}</PackagePrice>
           <PackageFeatures>
-            <FeatureItem $featureColor="#000">100 Credits</FeatureItem>
-            <FeatureItem $featureColor="#000">High Quality images</FeatureItem>
-            <FeatureItem $featureColor="#000">Full Customization Options</FeatureItem>
-            <FeatureItem $featureColor="#000">Dedicated Support & Consulting</FeatureItem>
-            <FeatureItem $featureColor="#000">High-Resolution Exports</FeatureItem>
+            <FeatureItem>250 Credits</FeatureItem>
+            <FeatureItem>Latest AI model</FeatureItem>
+            <FeatureItem>High-Resolution Exports</FeatureItem>
           </PackageFeatures>
-          <ChooseButton $bgColor="#333" $hoverColor="#555" onClick={() => handlePayment(600)}>
+          <ChooseButton onClick={() => handlePayment(prices.platinum)}>
             Buy Credits
           </ChooseButton>
         </PackageCard>
       </PackagesSection>
 
-      {/* Footer */}
       <footer>
-        <p>&copy; 2024 Urban Script LLC. All rights reserved.</p>
+        <p style={{ color: '#fff' }}>&copy; 2024 Urban Script LLC. All rights reserved.</p>
       </footer>
     </PageContainer>
   );

@@ -49,10 +49,10 @@ export default function UserInfo() {
             <h2 className="text-xl font-semibold mb-4">Account Settings</h2>
             <div className="space-y-4">
               <button className="w-full py-2 px-4 bg-green-500 text-white font-bold rounded-lg hover:bg-green-600 transition-colors">
-                Edit Profile
+                Edit Profile (coming son)
               </button>
               <button className="w-full py-2 px-4 bg-yellow-500 text-white font-bold rounded-lg hover:bg-yellow-600 transition-colors">
-                Change Password
+                Change Password (coming soon)
               </button>
               <button
                 onClick={() => signOut({ callbackUrl: "/" })}
@@ -65,7 +65,7 @@ export default function UserInfo() {
         )}
 
         {/* Recent Activity Section */}
-        <div className="p-4 bg-gray-50 rounded-lg shadow-sm mt-4">
+        {/* <div className="p-4 bg-gray-50 rounded-lg shadow-sm mt-4">
           <h2 className="text-xl font-semibold mb-2">Recent Activity</h2>
           <ul className="space-y-2">
             <li className="flex justify-between items-center text-gray-600">
@@ -81,7 +81,7 @@ export default function UserInfo() {
               <span className="text-xs text-gray-400">1 week ago</span>
             </li>
           </ul>
-        </div>
+        </div> */}
 
         {/* Contact Support Section */}
         <div className="p-4 bg-gray-50 rounded-lg shadow-sm mt-4 flex justify-between items-center">

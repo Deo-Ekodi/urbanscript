@@ -9,7 +9,7 @@ export async function POST(req) {
 
     const { token, newPassword } = await req.json();
 
-    console.log("Received arguments:", { token, newPassword });
+    // console.log("Received arguments:", { token, newPassword });
 
     const user = await User.findOne({ resetToken: token });
 

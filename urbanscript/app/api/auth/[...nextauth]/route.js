@@ -34,7 +34,7 @@ export const authOptions = {
 
           return user;
         } catch (error) {
-          console.log("Error: ", error);
+          // console.log("Error: ", error);
           throw new Error(error.message); // This message can be displayed to the user
         }
       },

@@ -32,7 +32,7 @@ export async function POST(req) {
       for (let e in error.errors) {
         errorList.push(error.errors[e].message);
       }
-      console.log(errorList);
+      // console.log(errorList);
       return NextResponse.json({ message: errorList, success: false });
     } else {
       return NextResponse.json({ message: ["Unable to send message."], success: false });

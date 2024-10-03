@@ -481,7 +481,7 @@ export default function Tool() {
                             <li>Optionally, enter a seed value for consistent results across generations.</li>
                             {/* <li>Enter your prompt in the input field to describe the image you want to generate.</li> */}
                             <li>Click <b>Generate</b> button to start the image generation process.</li>
-                            <li>Download and Own your images.</li>
+                            <li>Download and Own your images. (we do not store your images at the moment)</li>
                         </ol>
                     </div>
                 </div>

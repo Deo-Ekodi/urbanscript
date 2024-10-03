@@ -63,7 +63,7 @@ export default function RegisterForm() {
       }
     } catch (error) {
       setError("Error during registration.");
-      console.log("Error during registration: ", error);
+      // console.log("Error during registration: ", error);
     } finally {
       setLoading(false); // Stop loading spinner
     }
