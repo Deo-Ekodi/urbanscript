@@ -17,7 +17,7 @@ const UserSchema = new mongoose.Schema({
   },
   credits: {
     type: Number,
-    default: 30, // Initialize credits to 1
+    default: 4, // Initialize credits to 1
   },
   resetToken: {
     type: String,
@@ -25,10 +25,17 @@ const UserSchema = new mongoose.Schema({
   resetTokenExpiration: {
     type: Date,
   },
-},
-  // can introduce timestamps
-  {timestamps: true}
-);
+  verificationToken: {
+    type: String,
+  },
+  verificationTokenExpiration: {
+    type: Date,
+  },
+  verified: {
+    type: Boolean,
+    default: false, // Set to false by default
+  },
+}, { timestamps: true });
 
 const User = mongoose.models.User || mongoose.model('User', UserSchema);
 export default User;
