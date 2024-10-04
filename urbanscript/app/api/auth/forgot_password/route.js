@@ -9,7 +9,7 @@ export async function POST(req) {
 
     const { email } = await req.json();
 
-    // Validate email using a regular expression or a validation library
+    // Validate email using a regular expression
     if (!isValidEmail(email)) {
       return NextResponse.json(
         { message: "Invalid email address" },
@@ -41,24 +41,40 @@ export async function POST(req) {
       service: "gmail",
       auth: {
         user: process.env.GMAIL_EMAIL, // Your Gmail address
-        pass: process.env.GMAIL_PASSWORD, // Your Gmail app password (not regular password)
+        pass: process.env.GMAIL_PASSWORD, // Your Gmail app password
       },
     });
 
-    // Create email content
+    // Create a stylish email content
     const resetLink = `${process.env.NEXT_PUBLIC_FRONTEND_URL}/reset-password?token=${token}`; // Replace with your domain and reset password route
-    const emailBody = `
-      <p>You have requested a password reset for your account.</p>
-      <p>Click on the following link to reset your password:</p>
-      <a href="${resetLink}">${resetLink}</a>
-      <p>This link will expire in 1 hour.</p>
+    const emailHtml = `
+      <div style="font-family: Arial, sans-serif; background-color: #f9f9f9; padding: 20px;">
+        <div style="max-width: 600px; margin: 0 auto; background-color: #fff; padding: 30px; border-radius: 10px; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);">
+          <div style="text-align: center; padding-bottom: 20px;">
+            <img src="${process.env.NEXT_PUBLIC_FRONTEND_URL}/favicon.ico" alt="UrbanScript Logo" style="width: 120px; height: auto;" />
+          </div>
+          <h2 style="color: #333; font-size: 24px; text-align: center; font-weight: bold;">Password Reset Request</h2>
+          <p style="color: #555; font-size: 16px;">Hi,</p>
+          <p style="color: #555; font-size: 16px;">You have requested a password reset for your account. Please click the button below to reset your password:</p>
+          <div style="text-align: center; margin: 30px 0;">
+            <a href="${resetLink}" style="display: inline-block; background-color: #667eea; color: white; padding: 12px 20px; border-radius: 5px; text-decoration: none; font-size: 16px; font-weight: bold;">Reset Your Password</a>
+          </div>
+          <p style="color: #999; font-size: 14px;">If you did not request this password reset, please ignore this email.</p>
+          <p style="color: #999; font-size: 12px;">This link will expire in 1 hour.</p>
+          <hr style="margin: 30px 0; border: none; border-top: 1px solid #eee;" />
+          <div style="text-align: center;">
+            <p style="color: #999; font-size: 12px;">UrbanScript Inc. | 123 Design Street | City, State, ZIP</p>
+          </div>
+        </div>
+      </div>
     `;
-      // to: 'deogratiusekodi@gmail.com',
+
+    // Create email options
     const mailOptions = {
       from: process.env.GMAIL_EMAIL,
       to: email,
-      subject: "Password Reset Link",
-      html: emailBody,
+      subject: "Reset Your Password",
+      html: emailHtml,
     };
 
     // Send email
