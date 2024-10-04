@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 
 export default function VerifyAccount() {
   const router = useRouter();
-  const [verificationStatus, setVerificationStatus] = useState("Verifying your account..."); // Initial state
+  const [verificationStatus, setVerificationStatus] = useState("Verifying your account...");
   const [verified, setVerified] = useState(false);
 
   useEffect(() => {
@@ -19,10 +19,10 @@ export default function VerifyAccount() {
         setVerificationStatus("Your account has been successfully verified!");
         setVerified(true);
 
-        // Redirect to login after 3 seconds
+        // Redirect to login after 1.5 seconds
         setTimeout(() => {
           router.push("/login");
-        }, 3000);
+        }, 1500);
       } else {
         setVerificationStatus("Verification failed. Please try again.");
         setVerified(false);
@@ -36,10 +36,11 @@ export default function VerifyAccount() {
     <div className="verify-container">
       <div className="verify-content">
         {verified ? <div className="success-icon">✓</div> : <div className="loader"></div>}
-        <h1 className="verify-text">{verificationStatus}</h1>
+        <h1 className="verify-text" aria-live="polite">{verificationStatus}</h1>
         {verified ? (
           <p className="sub-text">
-            Redirecting you to the login page shortly...
+            Redirecting you to the login page shortly... Or{" "}
+            <a href="/login" className="login-link">click here</a> to go now.
           </p>
         ) : (
           <p className="sub-text">Hang tight, we're making sure everything checks out!</p>
@@ -92,6 +93,11 @@ export default function VerifyAccount() {
         .sub-text {
           font-size: 16px;
           color: #d1d5db;
+        }
+
+        .login-link {
+          color: #fff;
+          text-decoration: underline;
         }
 
         @keyframes spin {
