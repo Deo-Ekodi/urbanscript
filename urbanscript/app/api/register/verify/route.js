@@ -46,7 +46,9 @@ export async function GET(req) {
           <hr style="margin: 30px 0; border: none; border-top: 1px solid #eee;" />
           <div style="text-align: center;">
             <p style="color: #999; font-size: 12px;">If you have any questions, feel free to <a href="${process.env.NEXTAUTH_URL}/contact" style="color: #667eea; text-decoration: none;">contact our support team</a>.</p>
-            <p style="color: #999; font-size: 12px;">UrbanScript LLC. | Kimathi Street | Nyeri, Kenya</p>
+            <div style="text-align: center; padding: 20px; font-size: 12px; color: #777;">
+              &copy; ${new Date().getFullYear()} UrbanScript. All rights reserved.
+            </div>
           </div>
         </div>
       </div>
