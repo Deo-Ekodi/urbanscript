@@ -62,8 +62,8 @@ export async function POST(req) {
 
 
     const mailOptions = {
+      from: process.env.GMAIL_EMAIL,
       to: email,
-      from: process.env.GMAIL_USER,
       subject: "Verify your account",
       html: emailBody,
     };
@@ -74,15 +74,15 @@ export async function POST(req) {
       if (err) {
         console.error("Error sending email: ", err);
       } 
-      // else {
-        // console.log("Email sent: ", info.response);
-        // console.log("token sent: ", verificationToken);
-      // }
+      else {
+        console.log("Email sent: ", info.response);
+        console.log("token sent: ", verificationToken);
+      }
     });
     
 
     return NextResponse.json({ message: "User registered. Verification email sent." }, { status: 201 });
   } catch (error) {
-    return NextResponse.json({ message: "An error occurred while registering the user." }, { status: 500 });
+    return NextResponse.json({ message: "An error occurred while registering the user.", error: error.message }, { status: 500 });
   }
 }

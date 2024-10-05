@@ -62,9 +62,9 @@ export async function POST(req) {
           <p style="color: #999; font-size: 14px;">If you did not request this password reset, please ignore this email.</p>
           <p style="color: #999; font-size: 12px;">This link will expire in 1 hour.</p>
           <hr style="margin: 30px 0; border: none; border-top: 1px solid #eee;" />
-          <div style="text-align: center;">
-            <p style="color: #999; font-size: 12px;">UrbanScript Inc. | 123 Design Street | City, State, ZIP</p>
-          </div>
+          <div style="text-align: center; padding: 20px; font-size: 12px; color: #777;">
+            &copy; ${new Date().getFullYear()} UrbanScript. All rights reserved.
+        </div>
         </div>
       </div>
     `;
