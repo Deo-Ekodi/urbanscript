@@ -62,7 +62,7 @@ export async function POST(req) {
 
 
     const mailOptions = {
-      to: user.email,
+      to: email,
       from: process.env.GMAIL_USER,
       subject: "Verify your account",
       html: emailBody,
