@@ -70,17 +70,6 @@ export async function POST(req) {
 
     await transporter.sendMail(mailOptions);
 
-    // await transporter.sendMail(mailOptions, (err, info) => {
-    //   if (err) {
-    //     console.error("Error sending email: ", err);
-    //   } 
-    //   else {
-    //     console.log("Email sent: ", info.response);
-    //     console.log("token sent: ", verificationToken);
-    //   }
-    // });
-    
-
     return NextResponse.json({ message: "User registered. Verification email sent." }, { status: 201 });
   } catch (error) {
     return NextResponse.json({ message: "An error occurred while registering the user.", error: error.message }, { status: 500 });
