@@ -8,6 +8,7 @@ import AOS from 'aos';
 import 'aos/dist/aos.css';
 import './index.css';
 import ScrollToTop from '@/components/ScrollToTop'; // Verify this path
+import { Analytics } from "@vercel/analytics/react"
 
 const Layout = ({ children }) => {
     useEffect(() => {
@@ -31,6 +32,7 @@ const Layout = ({ children }) => {
                     <AuthProvider>
                         <ScrollToTop>
                             {children}
+                            <Analytics />
                         </ScrollToTop>
                     </AuthProvider>
                 </SessionProvider>
