@@ -87,16 +87,20 @@ import Intro from '@/components/Intro';
 // import Clients from './components/Clients';
 import Services from '@/components/Services';
 import Potforlio from '@/components/Potforlio';
+import Dashboard from '@/components/dashboard/DashboardPage';
+import dashboard from './dashboard/page';
 
 const Home = () => {
     return (
         <>
-            <Hero />
-            <Intro />
+            <Dashboard />
+            {/* <dashboard /> */}
+            {/* <Hero />
+            <Intro /> */}
             {/* <Services/> */}
             {/* <Potforlio/> */}
-            <Cta />
-            <Footer />
+            {/* <Cta /> */}
+            {/* <Footer /> */}
         </>
     );
 };
