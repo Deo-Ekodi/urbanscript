@@ -1111,7 +1111,7 @@ export default function Tool() {
     return (
         <div className="container mx-auto px-4 sm:px-8 py-8">
             <h1 className="py-6 text-center font-bold text-3xl text-white">
-                Generate Images with UrbanScript
+                Reimagine your space with UrbanScript
             </h1>
 
             {/* Modal Popup */}
