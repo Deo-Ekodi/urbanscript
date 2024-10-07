@@ -1253,12 +1253,14 @@ export default function Tool() {
                                     className="rounded-lg shadow-lg"
                                 />
                                 <button
+                                    type="button" // Add this to prevent form submission
                                     onClick={() => handleDownload(index)}
                                     className="absolute bottom-2 right-2 p-2 bg-blue-600 rounded-full text-white shadow hover:bg-blue-700 transition"
                                     aria-label={`Download image ${index + 1}`}
                                 >
                                     <FontAwesomeIcon icon={faDownload} size="lg" />
                                 </button>
+
                             </div>
                         ))}
                     </div>
