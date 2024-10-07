@@ -1093,21 +1093,37 @@ export default function Tool() {
         setLoading(false);
     };
 
-    const handleDownload = async () => {
-        const imageUrl = prediction.output[prediction.output.length - 1];
+    // const handleDownload = async () => {
+    //     const imageUrl = prediction.output[prediction.output.length - 1];
+    //     const response = await fetch(imageUrl);
+    //     const blob = await response.blob();
+
+    //     const link = document.createElement('a');
+    //     link.href = URL.createObjectURL(blob);
+    //     link.download = 'urban-script.png';
+    //     document.body.appendChild(link);
+    //     link.click();
+
+    //     document.body.removeChild(link);
+    //     URL.revokeObjectURL(link.href);
+    // };
+
+
+    const handleDownload = async (index) => {
+        const imageUrl = prediction.output[index];  // Use the index to get the correct image URL
         const response = await fetch(imageUrl);
         const blob = await response.blob();
-
+    
         const link = document.createElement('a');
         link.href = URL.createObjectURL(blob);
-        link.download = 'urban-script.png';
+        link.download = `urban-script-output-${index + 1}.png`;  // Naming each image with its index
         document.body.appendChild(link);
         link.click();
-
+    
         document.body.removeChild(link);
         URL.revokeObjectURL(link.href);
     };
-
+    
     return (
         <div className="container mx-auto px-4 sm:px-8 py-8">
             <h1 className="py-6 text-center font-bold text-3xl text-white">
