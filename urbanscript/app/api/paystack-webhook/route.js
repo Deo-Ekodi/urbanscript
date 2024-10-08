@@ -30,23 +30,23 @@ export const POST = async (req) => {
 
         // Logic for USD transactions
         if (currency === 'USD') {
-          if (amount === 800) {
-            user.credits += 50; // $8 = 50 credits
-          } else if (amount === 1300) {
-            user.credits += 100; // $13 = 100 credits
+          if (amount === 500) {
+            user.credits += 100; // $8 = 50 credits
+          } else if (amount === 1000) {
+            user.credits += 200; // $13 = 100 credits
           } else if (amount === 2500) {
-            user.credits += 250; // $25 = 250 credits
+            user.credits += 550; // $25 = 250 credits
           }
         }
 
         // Logic for KES transactions
         if (currency === 'KES') {
-          if (amount === 100000) {
-            user.credits += 50; // Ksh 1000 = 50 credits
-          } else if (amount === 170000) {
-            user.credits += 100; // Ksh 1700 = 100 credits
+          if (amount === 66000) {
+            user.credits += 100; // Ksh 1000 = 50 credits
+          } else if (amount === 132000) {
+            user.credits += 200; // Ksh 1700 = 100 credits
           } else if (amount === 325000) {
-            user.credits += 250; // Ksh 3250 = 250 credits
+            user.credits += 550; // Ksh 3250 = 250 credits
           }
         }
 

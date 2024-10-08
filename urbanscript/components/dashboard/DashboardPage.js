@@ -10,6 +10,10 @@ import DashboardHeader from "@/components/dashboard/DashboardHeader";
 import Footer from "../Footer";
 import Generator from "../prompt-generator/generator";
 
+// Font Awesome imports
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faBars, faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
+
 export default function Dashboard() {
   const { user } = useContext(AuthContext);
   const [activeComponent, setActiveComponent] = useState("Tool");
@@ -23,6 +27,7 @@ export default function Dashboard() {
     <>
       <NavBar />
       <div className="flex mt-20 relative h-screen">
+        {/* Sidebar */}
         <div className={`w-1/5 relative text-white p-6 overflow-y-auto bg-gray-900 transition-all duration-300 ${isSidebarOpen ? 'block' : 'hidden lg:block'}`}>
           <h2 className="text-2xl font-bold mb-6">Dashboard</h2>
           <ul className="space-y-4">
@@ -47,15 +52,17 @@ export default function Dashboard() {
           </ul>
         </div>
 
-        {/* Button to toggle sidebar */}
+        {/* Icon button to toggle sidebar */}
         <button
           onClick={toggleSidebar}
           className="absolute top-5 left-5 z-10 p-2 bg-blue-600 rounded-md text-white lg:hidden"
           aria-label="Toggle Sidebar"
         >
-          {isSidebarOpen ? 'Collapse' : 'Expand'}
+          {/* Conditionally render icons */}
+          <FontAwesomeIcon icon={isSidebarOpen ? faChevronLeft : faBars} />
         </button>
 
+        {/* Main content */}
         <div className={`flex-1 p-6 bg-cosmic-doodle overflow-y-auto transition-all duration-300 ${isSidebarOpen ? 'ml-1/5' : 'ml-0'}`}>
           <DashboardHeader />
           
