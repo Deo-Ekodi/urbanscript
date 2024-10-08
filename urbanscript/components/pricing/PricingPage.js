@@ -156,14 +156,14 @@ const PricingPage = () => {
     // Update prices based on selected currency
     if (currency === 'USD') {
       setPrices({
-        silver: 8, // 5 USD
-        gold: 13,  // 30 USD
+        silver: 5, // 5 USD
+        gold: 10,  // 30 USD
         platinum: 25, // 60 USD
       });
     } else if (currency === 'KES') {
       setPrices({
-        silver: 1000,  // 50 KES
-        gold: 1700,   // 300 KES
+        silver: 660,  // 50 KES
+        gold: 1320,   // 300 KES
         platinum: 3250, // 600 KES
       });
     }
@@ -215,7 +215,7 @@ const PricingPage = () => {
           <PackageTitle>Silver Plan</PackageTitle>
           <PackagePrice>{prices.silver} {currency}</PackagePrice>
           <PackageFeatures>
-            <FeatureItem>50 Credits</FeatureItem>
+            <FeatureItem>100 Credits</FeatureItem>
             <FeatureItem>Latest AI model</FeatureItem>
             <FeatureItem>High-Resolution Exports</FeatureItem>
           </PackageFeatures>
@@ -229,7 +229,7 @@ const PricingPage = () => {
           <PackageTitle>Gold Plan</PackageTitle>
           <PackagePrice>{prices.gold} {currency}</PackagePrice>
           <PackageFeatures>
-            <FeatureItem>100 Credits</FeatureItem>
+            <FeatureItem>200 Credits</FeatureItem>
             <FeatureItem>Latest AI model</FeatureItem>
             <FeatureItem>High-Resolution Exports</FeatureItem>
           </PackageFeatures>
@@ -243,7 +243,7 @@ const PricingPage = () => {
           <PackageTitle>Platinum Plan</PackageTitle>
           <PackagePrice>{prices.platinum} {currency}</PackagePrice>
           <PackageFeatures>
-            <FeatureItem>250 Credits</FeatureItem>
+            <FeatureItem>500 + 50 Credits</FeatureItem>
             <FeatureItem>Latest AI model</FeatureItem>
             <FeatureItem>High-Resolution Exports</FeatureItem>
           </PackageFeatures>
