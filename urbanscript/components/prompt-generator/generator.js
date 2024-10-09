@@ -198,10 +198,10 @@ const Generator = () => {
 
     const handleGeneratePrompt = () => {
 
-        if (!user) {
-            setErrorMessage('You must be logged in to generate a prompt.');
-            return;
-        }
+        // if (!user) {
+        //     setErrorMessage('You must be logged in to generate a prompt.');
+        //     return;
+        // }
 
         // Validate selections before generating the prompt
         if (!selectedPerspective || !selectedSpace || !selectedLayout || !selectedStyle || !selectedColorPalette || !selectedLighting) {
