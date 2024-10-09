@@ -9,6 +9,7 @@ import Tool from "@/components/tool/ToolPage"; // Adjust ToolPage to conditional
 import DashboardHeader from "@/components/dashboard/DashboardHeader";
 import Footer from "../Footer";
 import Generator from "../prompt-generator/generator";
+import Portfolio from "../potfolio/potforioPage";
 
 // Font Awesome imports
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -31,12 +32,12 @@ export default function Dashboard() {
         <div className={`w-1/5 relative text-white p-6 overflow-y-auto bg-gray-900 transition-all duration-300 ${isSidebarOpen ? 'block' : 'hidden lg:block'}`}>
           <h2 className="text-2xl font-bold mb-6">Dashboard</h2>
           <ul className="space-y-4">
-            <li
+            {/* <li
               className={`cursor-pointer p-2 rounded hover:bg-blue-700 transition-colors duration-200 ${activeComponent === "UserInfo" ? "bg-blue-600" : ""}`}
               onClick={() => setActiveComponent("UserInfo")}
             >
               User Info
-            </li>
+            </li> */}
             <li
               className={`cursor-pointer p-2 rounded hover:bg-blue-700 transition-colors duration-200 ${activeComponent === "Tool" ? "bg-blue-600" : ""}`}
               onClick={() => setActiveComponent("Tool")}
@@ -48,6 +49,12 @@ export default function Dashboard() {
               onClick={() => setActiveComponent("Generator")}
             >
               Prompt Generator
+            </li>
+            <li
+              className={`cursor-pointer p-2 rounded hover:bg-blue-700 transition-colors duration-200 ${activeComponent === "Portfolio" ? "bg-blue-600" : ""}`}
+              onClick={() => setActiveComponent("Portfolio")}
+            >
+              Portfolio
             </li>
           </ul>
         </div>
@@ -67,9 +74,10 @@ export default function Dashboard() {
           <DashboardHeader />
           
           {/* Conditionally render components based on active selection */}
-          {activeComponent === "UserInfo" && <UserInfo />}
+          {/* {activeComponent === "UserInfo" && <UserInfo />} */}
           {activeComponent === "Tool" && <Tool />}
           {activeComponent === "Generator" && <Generator />}
+          {activeComponent === "Portfolio" && <Portfolio />}
         </div>
       </div>
       <Footer />
