@@ -4,7 +4,7 @@ import { useState, useContext } from "react";
 import { useRouter } from 'next/navigation';
 import Image from "next/image";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faDownload, faInfoCircle } from '@fortawesome/free-solid-svg-icons';
+import { faDownload, faInfoCircle, faUpload } from '@fortawesome/free-solid-svg-icons';
 import { AuthContext } from '@/app/providers/providers';
 
 
@@ -24,110 +24,123 @@ export default function Tool() {
     const [warning, setWarning] = useState('');
     const [loginWarning, setLoginWarning] = useState(false);  // For login warnings
     const [showModal, setShowModal] = useState(false);        // To control modal visibility
+    const [image, setImage] = useState(null); // For local image uploads
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-
-        // if (!user) {
-        //     setLoginWarning(true);
-        //     setShowModal(true);  // Show the modal
-        //     return;
-        // }
-
+    
         setLoading(true);
         setError(null);
+    
+        let fileUrl = null;
+    
+        try {
+            // Check if the image is selected
+            if (image) {
+                const formData = new FormData();
+                formData.append("content", image);
+    
+                // Send image to the /api/predictions/upload route
+                const uploadResponse = await fetch("/api/predictions/upload", {
+                    method: "POST",
+                    body: formData,
+                });
+    
+                if (!uploadResponse.ok) {
+                    throw new Error("Image upload failed.");
+                }
+    
+                const uploadResult = await uploadResponse.json();
+                fileUrl = uploadResult.fileUrl; // Get the file URL from the response
+            }
 
-        // Fetch user's credits
-        // const creditsResponse = await fetch("/api/check-credits", {
-        //     method: "POST",
-        //     headers: {
-        //         "Content-Type": "application/json",
-        //     },
-        //     body: JSON.stringify({ email: user.email }),
-        // });
+            console.log("done with upload, should now log url");
 
-        // const { credits } = await creditsResponse.json();
-
-        // // Check user credits
-        // if (credits < numOutputs) {
-        //     setWarning(`You do not have enough credits to generate ${numOutputs} image(s). Please purchase more credits.`);
-        //     setLoading(false);
-        //     setShowModal(true);  // Show the modal for insufficient credits
-        //     return;
-        // }
-
-        const response = await fetch("/api/predictions", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
+            console.log("File URL: " + fileUrl);
+    
+            // Prepare the prediction data, including the file URL if present
+            const predictionData = {
                 prompt: e.target.prompt.value,
                 num_outputs: parseInt(numOutputs, 10),
                 seed: seed || null,
-            }),
-        });
+                ...(fileUrl && { file: fileUrl }) // Add the file URL to the input params
+            };
+            // ...(fileUrl && { file: fileUrl }) // Add the file URL to the input params
 
-        let prediction = await response.json();
-        if (response.status !== 201) {
-            setError(prediction.detail);
-            setLoading(false);
-            return;
-        }
-
-        setPrediction(prediction);
-
-        let generatedCount = 0;
-        while (
-            prediction.status !== "succeeded" &&
-            prediction.status !== "failed"
-        ) {
-            await sleep(1000);
-            const response = await fetch("/api/predictions/" + prediction.id);
-            prediction = await response.json();
-            if (response.status !== 200) {
+            // Submit the prediction data to your backend API
+            const response = await fetch("/api/predictions", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(predictionData), // Send JSON data
+            });
+    
+            let prediction = await response.json();
+    
+            // Handle response errors
+            if (response.status !== 201) {
                 setError(prediction.detail);
                 setLoading(false);
                 return;
             }
+    
             setPrediction(prediction);
-
-            if (prediction.output && prediction.output.length > generatedCount) {
-                generatedCount = prediction.output.length;
+    
+            // Poll for prediction status until it is either succeeded or failed
+            let generatedCount = 0;
+            while (prediction.status !== "succeeded" && prediction.status !== "failed") {
+                await sleep(1000);
+                const response = await fetch("/api/predictions/" + prediction.id);
+                prediction = await response.json();
+    
+                if (response.status !== 200) {
+                    setError(prediction.detail);
+                    setLoading(false);
+                    return;
+                }
+    
+                setPrediction(prediction);
+    
+                // Update the count of generated outputs
+                if (prediction.output && prediction.output.length > generatedCount) {
+                    generatedCount = prediction.output.length;
+                }
             }
+    
+        } catch (error) {
+            console.error('Error:', error);
+            setError(error.message);
+            setLoading(false);
+            return;
         }
-
-        // if (generatedCount > 0) {
-        //     await fetch("/api/deduct-credits", {
-        //         method: "POST",
-        //         headers: {
-        //             "Content-Type": "application/json",
-        //         },
-        //         body: JSON.stringify({
-        //             email: user.email,
-        //             creditsToDeduct: generatedCount,
-        //         }),
-        //     });
-        // }
-
+    
         setLoading(false);
+    };
+
+
+    const handleImageUpload = (e) => {
+        const file = e.target.files[0];
+        if (file) {
+            setImage(file);
+        }
     };
 
     const handleDownload = async (index) => {
         const imageUrl = prediction.output[index];  // Use the index to get the correct image URL
         const response = await fetch(imageUrl);
         const blob = await response.blob();
-    
+
         const link = document.createElement('a');
         link.href = URL.createObjectURL(blob);
         link.download = `urban-script-output-${index + 1}.png`;  // Naming each image with its index
         document.body.appendChild(link);
         link.click();
-    
+
         document.body.removeChild(link);
         URL.revokeObjectURL(link.href);
     };
-    
+
     return (
         <div className="container mx-auto px-4 sm:px-8 py-8">
             <h1 className="py-6 text-center font-bold text-3xl text-white">
@@ -229,6 +242,31 @@ export default function Tool() {
                         </div>
                     </div>
                 </div>
+
+                {/* Image Upload Section */}
+                <div className="flex items-center gap-4">
+                    <label className="block text-white mb-1">
+                        Upload an Image (Optional):
+                    </label>
+                    <input
+                        type="file"
+                        accept="image/*"
+                        onChange={handleImageUpload}
+                        className="hidden"
+                        id="upload"
+                    />
+                    <label htmlFor="upload" className="flex items-center bg-green-500 text-white px-4 py-2 rounded-lg cursor-pointer hover:bg-green-600 transition">
+                        <FontAwesomeIcon icon={faUpload} className="mr-2" />
+                        Upload Image
+                    </label>
+                </div>
+
+                {/* Display Uploaded Image */}
+                {image && (
+                    <div className="mt-4">
+                        <p className="text-white">Selected Image: {image.name}</p>
+                    </div>
+                )}
 
                 {/* Submit Section */}
                 <div className="flex flex-col lg:flex-row lg:items-end gap-4 w-full mt-4">
@@ -385,3 +423,4 @@ export default function Tool() {
         </div>
     );
 }
+
