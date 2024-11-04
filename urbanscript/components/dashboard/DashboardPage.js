@@ -23,7 +23,7 @@ export default function Dashboard() {
   useEffect(() => {
     // Initialize TIXAE Agents script for popup at bottom right
     window.VG_CONFIG = {
-      ID: "wbsy8xqtsydjbl98",
+      ID: "lv1vwt6p48wo3b1q",
       region: 'na',
       render: 'popup', // Changes to popup for chat-like widget
       stylesheets: [
