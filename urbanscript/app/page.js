@@ -89,18 +89,19 @@ import Services from '@/components/Services';
 import Potforlio from '@/components/Potforlio';
 import Dashboard from '@/components/dashboard/DashboardPage';
 import dashboard from './dashboard/page';
+import NavBar from '@/components/Navbar/NavBar';
 
 const Home = () => {
     return (
         <>
-            <Dashboard />
+            {/* <Dashboard /> */}
             {/* <dashboard /> */}
-            {/* <Hero />
-            <Intro /> */}
-            {/* <Services/> */}
-            {/* <Potforlio/> */}
-            {/* <Cta /> */}
-            {/* <Footer /> */}
+            <Hero />
+            <Intro />
+            <Services/>
+            <Potforlio/>
+            <Cta />
+            <Footer />
         </>
     );
 };
