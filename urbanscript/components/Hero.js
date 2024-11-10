@@ -34,6 +34,23 @@ const Hero = () => {
         return () => clearInterval(interval);
     }, []);
 
+    useEffect(() => {
+        // Initialize TIXAE Agents script for popup at bottom right
+        window.VG_CONFIG = {
+          ID: "lv1vwt6p48wo3b1q",
+          region: 'na',
+          render: 'popup', // Changes to popup for chat-like widget
+          stylesheets: [
+            "https://vg-bunny-cdn.b-cdn.net/vg_live_build/styles.css",
+          ]
+        };
+    
+        const VG_SCRIPT = document.createElement("script");
+        VG_SCRIPT.src = "https://vg-bunny-cdn.b-cdn.net/vg_live_build/vg_bundle.js";
+        VG_SCRIPT.defer = true;
+        document.body.appendChild(VG_SCRIPT);
+      }, []);
+
     const nextImage = () => {
         setIsFading(true);
         setTimeout(() => {
